@@ -1,14 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Echoboard</title>
+  <title>echoboard</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+	<!--[if lt IE 9]>
+	  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+	<%= render 'shared/header' %>
+
+	<div class="container">
+		<% flash.each do |name, msg| -%>
+			<%= display_flash(name, msg) %>
+		<% end -%>
+
+		<%= yield %>
+
+		<hr />
+
+		<%= render 'shared/footer' %>
+	</div>
 
 </body>
 </html>
