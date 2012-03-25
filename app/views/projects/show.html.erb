@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Name:</b>
   <%= @project.name %>
@@ -15,6 +13,6 @@
   <%= @project.go_live %>
 </p>
 
-
 <%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Destroy', @project, confirm: 'Are you sure?', method: :delete %> |
 <%= link_to 'Back', projects_path %>

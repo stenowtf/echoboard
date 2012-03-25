@@ -1,29 +1,12 @@
-<%= form_for(@project) do |f| %>
-  <% if @project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
-
-      <ul>
-      <% @project.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :go_live %><br />
-    <%= f.datetime_select :go_live %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+<%= simple_form_for(@project) do |f| %>
+	<legend>Projects data</legend>
+	<%= f.error_notification %>
+	<%= f.input :name, :input_html => { :class => "span6" }, :hint => "Project name" %>
+	<%= f.input :description, :input_html => { :class => "span6" }, :hint => "Project description" %>
+  <%= f.input :go_live, :input_html => { :class => "span2" }, :hint => "Go live date" %>
+	<%= f.error :base %>
+	<div class="form-actions">
+		<%= f.button :submit, :class => "btn-primary" %>
+		<%= submit_tag "Reset", :type => :reset, :class => "btn" %>
   </div>
 <% end %>
