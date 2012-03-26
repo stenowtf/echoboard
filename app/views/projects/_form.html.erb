@@ -2,11 +2,12 @@
 	<legend>Projects data</legend>
 	<%= f.error_notification %>
 	<%= f.input :name, :input_html => { :class => "span6" }, :hint => "Project name" %>
-	<%= f.input :description, :input_html => { :class => "span6" }, :hint => "Project description" %>
-  <%= f.input :go_live, :input_html => { :class => "span2" }, :hint => "Go live date" %>
+	<%= f.input :description, :input_html => { :id => "project-description", :class => "span6" }, :hint => "Project description" %>
+  <%= f.input :go_live, :input_html => { :class => "input-small" }, :hint => "Go live date" %>
 	<%= f.error :base %>
 	<div class="form-actions">
 		<%= f.button :submit, :class => "btn-primary" %>
 		<%= submit_tag "Reset", :type => :reset, :class => "btn" %>
+		or <%= link_to "go back", projects_path %>.
   </div>
 <% end %>

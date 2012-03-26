@@ -1,18 +1,28 @@
-<p>
-  <b>Name:</b>
-  <%= @project.name %>
-</p>
+<ul class="breadcrumb">
+	<li>
+		<i class="icon-home"></i> <%= link_to "Home", root_path %>
+		<span class="divider">/</span>
+	</li>
+  <li>
+		<i class="icon-file"></i> <%= link_to "Projects", projects_path %>
+		<span class="divider">/</span>
+	</li>
+  <li class="active"><%= @project.name %></li>
+</ul>
 
-<p>
-  <b>Description:</b>
-  <%= @project.description %>
-</p>
+<div class="row">
+	<div class="span8">
+		<div>
+		  <h2><%= @project.name %></h2>
+			<p>(<%= @project.go_live %>)</p>
+		</div>
+	</div>
+	<div class="span4">
+		<%= link_to "Edit", edit_project_path(@project), :class => "btn btn-primary" %>
+		<%= link_to "Destroy", @project, confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %>
+	</div>
+</div>
 
-<p>
-  <b>Go live:</b>
-  <%= @project.go_live %>
-</p>
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Destroy', @project, confirm: 'Are you sure?', method: :delete %> |
-<%= link_to 'Back', projects_path %>
+<div class="well">
+  <p><%= @project.description %></p>
+</div>

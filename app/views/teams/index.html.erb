@@ -1,5 +1,22 @@
-<div class="page-header">
-  <h1>Listing team <small>sub</small></h1>
+<ul class="breadcrumb">
+	<li>
+		<i class="icon-home"></i> <%= link_to "Home", root_path %>
+		<span class="divider">/</span>
+	</li>
+  <li class="active">
+		<i class="icon-user"></i> Teams
+	</li>
+</ul>
+
+<div class="row">
+	<div class="span8">
+		<div class="page-header">
+		  <h1>Listing teams</h1>
+		</div>
+	</div>
+	<div class="span4">
+		<%= link_to "New team", new_team_path, :class => "btn btn-primary" %>
+	</div>
 </div>
 
 <table class="table table-striped">
@@ -22,5 +39,3 @@
 	<% end %>
 	</tbody>
 </table>
-
-<%= link_to 'New Team', new_team_path %>

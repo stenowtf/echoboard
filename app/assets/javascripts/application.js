@@ -13,4 +13,6 @@
 //= require 'jquery'
 //= require 'jquery_ujs'
 //= require 'bootstrap'
+//= require 'wysihtml5-0.3.0_rc1.min.js'
+//= require 'bootstrap-wysihtml5.js'
 //= require_tree .

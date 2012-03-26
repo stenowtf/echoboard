@@ -1,14 +1,27 @@
-<p>
-  <b>Name:</b>
-  <%= @team.name %>
-</p>
+<ul class="breadcrumb">
+	<li>
+		<i class="icon-home"></i> <%= link_to "Home", root_path %>
+		<span class="divider">/</span>
+	</li>
+  <li>
+		<i class="icon-user"></i> <%= link_to "Teams", teams_path %>
+		<span class="divider">/</span>
+	</li>
+  <li class="active"><%= @team.name %></li>
+</ul>
 
-<p>
-  <b>Description:</b>
-  <%= @team.description %>
-</p>
+<div class="row">
+	<div class="span8">
+		<div>
+		  <h2><%= @team.name %></h2>
+		</div>
+	</div>
+	<div class="span4">
+		<%= link_to "Edit", edit_team_path(@team), :class => "btn btn-primary" %>
+		<%= link_to "Destroy", @team, confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %>
+	</div>
+</div>
 
-
-<%= link_to 'Edit', edit_team_path(@team) %> |
-<%= link_to 'Destroy', @team, confirm: 'Are you sure?', method: :delete %> |
-<%= link_to 'Back', teams_path %>
+<div class="well">
+  <p><%= @team.description %></p>
+</div>

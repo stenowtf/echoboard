@@ -1,8 +1,22 @@
-<div class="page-header">
-  <h1>Editing project <small>sub</small></h1>
+<ul class="breadcrumb">
+	<li>
+		<i class="icon-home"></i> <%= link_to "Home", root_path %>
+		<span class="divider">/</span>
+	</li>
+  <li>
+		<i class="icon-file"></i> <%= link_to "Projects", projects_path %>
+		<span class="divider">/</span>
+	</li>
+  <li class="active">Edit project</li>
+</ul>
+
+<div class="row">
+	<div class="span8">
+		<div class="page-header">
+		  <h1>Editing project <small>sub</small></h1>
+		</div>
+	</div>
+	<div class="span4"></div>
 </div>
 
 <%= render 'form' %>
-
-<%= link_to 'Show', @project %> |
-<%= link_to 'Back', projects_path %>

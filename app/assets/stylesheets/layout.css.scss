@@ -3,4 +3,8 @@
 body {
 	padding-top: 60px;
 	padding-bottom: 40px;
+
+	.hero-unit h1 {
+		text-rendering: auto; /* Chrome for Windows bug */
+	}
 }
