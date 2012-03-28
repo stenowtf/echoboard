@@ -3,11 +3,6 @@
     <div class="container">
 			<%= link_to "echoboard", root_path, :class => "brand" %>
 			<ul class="nav">
-				<li class="<%= 'active' if current_page?(root_path) %>">
-					<%= link_to root_path do %>
-						<i class="icon-home icon-white"></i> Home
-					<% end %>
-				</li>
 				<li class="<%= 'active' if current_page?(projects_path) %>">
 					<%= link_to projects_path do %>
 						<i class="icon-file icon-white"></i> Projects
@@ -22,7 +17,7 @@
 			<ul class="nav pull-right">
 				<li class="<%= 'active' if current_page?(help_path) %>">
 					<%= link_to help_path do %>
-						<i class="icon-question-sign icon-white"></i> Help
+						<i class="icon-info-sign icon-white"></i> Help
 					<% end %>
 				</li>
 			</ul>
