@@ -1,13 +1,13 @@
 <%= simple_form_for([@project, @story]) do |f| %>
 	<legend>Story data</legend>
 	<%= f.error_notification %>
-  <%= f.input :priority, :input_html => { :class => "span1" }, :hint => "Story priority" %>
   <%= f.input :name, :input_html => { :class => "span6" }, :hint => "Story name" %>
+  <%= f.input :priority, :collection => 0..2, :as => :radio_buttons, :hint => "Story priority" %>
+  <%= f.input :estimated_difficulty, :collection => [3, 5, 8, 13, 21], :as => :radio_buttons, :hint => "Story estimated difficulty" %>
   <%= f.input :description, :input_html => { :id => "story-description", :class => "span6" }, :hint => "Story description" %>
+  <%= f.input :status, :collection => ["Backlog", "Doing", "Test", "Done"], :as => :radio_buttons, :hint => "Story status" %>
   <%= f.input :definition_of_done, :input_html => { :id => "story-dod", :class => "span6" }, :hint => "Story definition of done" %>
-  <%= f.input :category, :input_html => { :class => "span4" }, :hint => "Story category" %>
-  <%= f.input :estimated_difficulty, :input_html => { :class => "span1" }, :hint => "Story estimated difficulty" %>
-  <%= f.input :status, :input_html => { :class => "span4" }, :hint => "Story status" %>
+  <%= f.input :category, :collection => ["Active", "Freezed", "Dropped"], :as => :radio_buttons, :hint => "Story category" %>
   <%= f.error :base %>
 	<div class="form-actions">
 		<%= f.button :submit, :class => "btn-primary" %>

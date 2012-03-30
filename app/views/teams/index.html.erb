@@ -27,7 +27,6 @@
 	    <th>#</th>
 	    <th>Name</th>
 	    <th>Description</th>
-	    <th>Updated at</th>
     </tr>
   </thead>
 	<tbody>
@@ -36,7 +35,6 @@
 			<td><%= team.id %></td>
 	    <td><%= link_to team.name, team_path(team) %></td>
 	    <td><%= team.description %></td>
-			<td><%= team.updated_at %></td>
 	  </tr>
 	<% end %>
 	</tbody>

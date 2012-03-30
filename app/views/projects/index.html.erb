@@ -28,7 +28,6 @@
 	    <th>Name</th>
 	    <th>Description</th>
 			<th>Go live</th>
-	    <th>Updated at</th>
     </tr>
   </thead>
 	<tbody>
@@ -38,7 +37,6 @@
 	    <td><%= link_to project.name, project_path(project) %></td>
 	    <td><%= project.description %></td>
 	    <td><%= project.go_live %></td>
-			<td><%= project.updated_at %></td>
 	  </tr>
 	<% end %>
 	</tbody>
