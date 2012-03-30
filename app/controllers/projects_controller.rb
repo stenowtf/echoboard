@@ -1,6 +1,5 @@
 class ProjectsController < ApplicationController
-  # GET /projects
-  # GET /projects.json
+  # GET /projects(.:format)
   def index
     @projects = Project.all
 
@@ -10,10 +9,11 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # GET /projects/1
-  # GET /projects/1.json
+  # GET /projects/:id(.:format)
   def show
     @project = Project.find(params[:id])
+    @stories = @project.stories.all
+    @iterations = @project.iterations.all
 
     respond_to do |format|
       format.html # show.html.erb
@@ -21,8 +21,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # GET /projects/new
-  # GET /projects/new.json
+  # GET /projects/new(.:format)
   def new
     @project = Project.new
 
@@ -32,13 +31,12 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # GET /projects/1/edit
+  # GET /projects/:id/edit(.:format)
   def edit
     @project = Project.find(params[:id])
   end
 
-  # POST /projects
-  # POST /projects.json
+  # POST /projects(.:format)
   def create
     @project = Project.new(params[:project])
 
@@ -53,8 +51,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # PUT /projects/1
-  # PUT /projects/1.json
+  # PUT /projects/:id(.:format)
   def update
     @project = Project.find(params[:id])
 
@@ -69,8 +66,7 @@ class ProjectsController < ApplicationController
     end
   end
 
-  # DELETE /projects/1
-  # DELETE /projects/1.json
+  # DELETE /projects/:id(.:format)
   def destroy
     @project = Project.find(params[:id])
     @project.destroy

@@ -1,0 +1,17 @@
+<%= simple_form_for([@project, @story]) do |f| %>
+	<legend>Story data</legend>
+	<%= f.error_notification %>
+  <%= f.input :priority, :input_html => { :class => "span1" }, :hint => "Story priority" %>
+  <%= f.input :name, :input_html => { :class => "span6" }, :hint => "Story name" %>
+  <%= f.input :description, :input_html => { :id => "story-description", :class => "span6" }, :hint => "Story description" %>
+  <%= f.input :definition_of_done, :input_html => { :id => "story-dod", :class => "span6" }, :hint => "Story definition of done" %>
+  <%= f.input :category, :input_html => { :class => "span4" }, :hint => "Story category" %>
+  <%= f.input :estimated_difficulty, :input_html => { :class => "span1" }, :hint => "Story estimated difficulty" %>
+  <%= f.input :status, :input_html => { :class => "span4" }, :hint => "Story status" %>
+  <%= f.error :base %>
+	<div class="form-actions">
+		<%= f.button :submit, :class => "btn-primary" %>
+		<%= submit_tag "Reset", :type => :reset, :class => "btn" %>
+		or <%= link_to "go back", project_path(@project) %>.
+  </div>
+<% end %>

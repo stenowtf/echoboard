@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  priority: 1
+  name: MyString
+  description: MyText
+  definition_of_done: MyText
+  category: MyString
+  estimated_difficulty: 1
+  status: MyString
+
+two:
+  priority: 1
+  name: MyString
+  description: MyText
+  definition_of_done: MyText
+  category: MyString
+  estimated_difficulty: 1
+  status: MyString

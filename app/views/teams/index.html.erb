@@ -15,7 +15,9 @@
 		</div>
 	</div>
 	<div class="span4">
-		<%= link_to "New team", new_team_path, :class => "btn btn-primary" %>
+		<%= link_to new_team_path, :class => "btn btn-primary" do %>
+			<i class="icon-plus icon-white"></i> New team
+		<% end %>
 	</div>
 </div>
 

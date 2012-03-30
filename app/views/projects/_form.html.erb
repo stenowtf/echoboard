@@ -1,5 +1,5 @@
 <%= simple_form_for(@project) do |f| %>
-	<legend>Projects data</legend>
+	<legend>Project data</legend>
 	<%= f.error_notification %>
 	<%= f.input :name, :input_html => { :class => "span6" }, :hint => "Project name" %>
 	<%= f.input :description, :input_html => { :id => "project-description", :class => "span6" }, :hint => "Project description" %>

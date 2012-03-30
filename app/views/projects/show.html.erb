@@ -4,10 +4,10 @@
 		<span class="divider">/</span>
 	</li>
   <li>
-		<i class="icon-file"></i> <%= link_to "Projects", projects_path %>
+		<i class="icon-book"></i> <%= link_to "Projects", projects_path %>
 		<span class="divider">/</span>
 	</li>
-  <li class="active"><%= @project.name %></li>
+  <i class="icon-file"></i> <li class="active">“<%= @project.name %>”</li>
 </ul>
 
 <div class="row">
@@ -18,11 +18,119 @@
 		</div>
 	</div>
 	<div class="span4">
-		<%= link_to "Edit", edit_project_path(@project), :class => "btn btn-primary" %>
-		<%= link_to "Destroy", @project, confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %>
+		<div class="btn-toolbar">
+			<div class="btn-group">
+			  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+			    <i class="icon-cog"></i> Project actions
+			    <span class="caret"></span>
+			  </a>
+			  <ul class="dropdown-menu">
+					<li>
+						<%= link_to edit_project_path(@project) do %>
+							<i class="icon-pencil"></i> Edit project
+						<% end %>
+					</li>
+					<li>
+						<%= link_to @project, confirm: 'Are you sure?', method: :delete do %>
+							<i class="icon-remove"></i> Delete project
+						<% end %>
+					</li>
+			  </ul>
+			</div>
+			<div class="btn-group">
+			  <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+			    <i class="icon-plus icon-white"></i> Add
+			    <span class="caret"></span>
+			  </a>
+			  <ul class="dropdown-menu">
+					<li>
+						<%= link_to new_project_story_path(@project) do %>
+							<i class="icon-bookmark"></i> New story
+						<% end %>
+					</li>
+					<li>
+						<%= link_to new_project_iteration_path(@project) do %>
+							<i class="icon-repeat"></i> New iteration
+						<% end %>
+					</li>
+			  </ul>
+			</div>
+		</div>
 	</div>
 </div>
 
 <div class="well">
   <p><%= @project.description %></p>
 </div>
+
+<div class="row">
+	<div class="span8">
+		<div>
+		  <h3>Stories</h3>
+		</div>
+	</div>
+	<div class="span4">
+	</div>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+	    <th>#</th>
+	    <th>Priority</th>
+	    <th>Name</th>
+			<th>Description</th>
+	    <th>Definition of done</th>
+	    <th>Category</th>
+			<th>Estimated difficulty</th>
+	    <th>Status</th>
+    </tr>
+  </thead>
+	<tbody>
+	<% @stories.each do |story| %>
+	  <tr>
+			<td><%= story.id %></td>
+			<td><%= story.priority %></td>
+	    <td><%= link_to story.name, project_story_path(@project, story) %></td>
+	    <td><%= story.description %></td>
+	    <td><%= story.definition_of_done %></td>
+			<td><%= story.category %></td>
+	    <td><%= story.estimated_difficulty %></td>
+			<td><%= story.status %></td>
+	  </tr>
+	<% end %>
+	</tbody>
+</table>
+
+<div class="row">
+	<div class="span8">
+		<div>
+		  <h3>Iterations</h3>
+		</div>
+	</div>
+	<div class="span4">
+	</div>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+	    <th>#</th>
+	    <th>Starting date</th>
+	    <th>Ending date</th>
+			<th>Notes</th>
+	    <th>Meeting</th>
+    </tr>
+  </thead>
+	<tbody>
+	<% @iterations.each do |iteration| %>
+	  <tr>
+	    <td><%= link_to iteration.id, project_iteration_path(@project, iteration) %></td>
+			<td><%= iteration.starting_date %></td>
+			<td><%= iteration.starting_date %></td>
+			<td><%= iteration.notes %></td>
+			<td><%= iteration.meeting %></td>
+	  </tr>
+	<% end %>
+	</tbody>
+</table>

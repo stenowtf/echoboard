@@ -7,7 +7,7 @@
 		<i class="icon-user"></i> <%= link_to "Teams", teams_path %>
 		<span class="divider">/</span>
 	</li>
-  <li class="active"><%= @team.name %></li>
+  <i class="icon-eye-open"></i> <li class="active">“<%= @team.name %>”</li>
 </ul>
 
 <div class="row">
@@ -17,8 +17,24 @@
 		</div>
 	</div>
 	<div class="span4">
-		<%= link_to "Edit", edit_team_path(@team), :class => "btn btn-primary" %>
-		<%= link_to "Destroy", @team, confirm: 'Are you sure?', method: :delete, :class => "btn btn-danger" %>
+		<div class="btn-group">
+		  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+		    <i class="icon-cog"></i> Team actions
+		    <span class="caret"></span>
+		  </a>
+		  <ul class="dropdown-menu">
+				<li>
+					<%= link_to edit_team_path(@team) do %>
+						<i class="icon-pencil"></i> Edit team
+					<% end %>
+				</li>
+				<li>
+					<%= link_to @team, confirm: 'Are you sure?', method: :delete do %>
+						<i class="icon-remove"></i> Delete team
+					<% end %>
+				</li>
+		  </ul>
+		</div>
 	</div>
 </div>
 

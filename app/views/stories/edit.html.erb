@@ -7,13 +7,17 @@
 		<i class="icon-book"></i> <%= link_to "Projects", projects_path %>
 		<span class="divider">/</span>
 	</li>
-  <i class="icon-file"></i> <li class="active">Edit project “<%= @project.name %>”</li>
+  <li>
+		<i class="icon-file"></i> “<%= link_to @project.name, project_path(@project) %>”
+		<span class="divider">/</span>
+	</li>
+  <i class="icon-bookmark"></i> <li class="active">Edit story “<%= @story.name %>”</li>
 </ul>
 
 <div class="row">
 	<div class="span8">
 		<div class="page-header">
-		  <h1>Editing project <small>sub</small></h1>
+		  <h1>Editing story <small>sub</small></h1>
 		</div>
 	</div>
 	<div class="span4"></div>

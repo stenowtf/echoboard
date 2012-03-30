@@ -1,0 +1,52 @@
+<ul class="breadcrumb">
+	<li>
+		<i class="icon-home"></i> <%= link_to "Home", root_path %>
+		<span class="divider">/</span>
+	</li>
+  <li>
+		<i class="icon-book"></i> <%= link_to "Projects", projects_path %>
+		<span class="divider">/</span>
+	</li>
+  <li>
+		<i class="icon-file"></i> “<%= link_to @project.name, project_path(@project) %>”
+		<span class="divider">/</span>
+	</li>
+  <i class="icon-bookmark"></i> <li class="active">“<%= @story.name %>”</li>
+</ul>
+
+<p>
+  <b>Priority:</b>
+  <%= @story.priority %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @story.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @story.description %>
+</p>
+
+<p>
+  <b>Definition of done:</b>
+  <%= @story.definition_of_done %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @story.category %>
+</p>
+
+<p>
+  <b>Estimated difficulty:</b>
+  <%= @story.estimated_difficulty %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @story.status %>
+</p>
+
+<%= link_to 'Edit', edit_project_story_path(@project, @story) %>

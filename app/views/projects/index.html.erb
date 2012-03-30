@@ -4,7 +4,7 @@
 		<span class="divider">/</span>
 	</li>
   <li class="active">
-		<i class="icon-file"></i> Projects
+		<i class="icon-book"></i> Projects
 	</li>
 </ul>
 
@@ -15,7 +15,9 @@
 		</div>
 	</div>
 	<div class="span4">
-		<%= link_to "New project", new_project_path, :class => "btn btn-primary" %>
+		<%= link_to new_project_path, :class => "btn btn-primary" do %>
+			<i class="icon-plus icon-white"></i> New project
+		<% end %>
 	</div>
 </div>
 

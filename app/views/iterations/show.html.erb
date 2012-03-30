@@ -1,0 +1,37 @@
+<ul class="breadcrumb">
+	<li>
+		<i class="icon-home"></i> <%= link_to "Home", root_path %>
+		<span class="divider">/</span>
+	</li>
+  <li>
+		<i class="icon-book"></i> <%= link_to "Projects", projects_path %>
+		<span class="divider">/</span>
+	</li>
+  <li>
+		<i class="icon-file"></i> “<%= link_to @project.name, project_path(@project) %>”
+		<span class="divider">/</span>
+	</li>
+  <i class="icon-repeat"></i> <li class="active">“<%= @iteration.id %>”</li>
+</ul>
+
+<p>
+  <b>Starting date:</b>
+  <%= @iteration.starting_date %>
+</p>
+
+<p>
+  <b>Ending date:</b>
+  <%= @iteration.ending_date %>
+</p>
+
+<p>
+  <b>Notes:</b>
+  <%= @iteration.notes %>
+</p>
+
+<p>
+  <b>Meeting:</b>
+  <%= @iteration.meeting %>
+</p>
+
+<%= link_to 'Edit', edit_project_iteration_path(@project, @iteration) %>
