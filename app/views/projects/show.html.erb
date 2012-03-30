@@ -66,6 +66,25 @@
 <div class="row">
 	<div class="span8">
 		<div>
+		  <h3>Iterations</h3>
+		</div>
+	</div>
+	<div class="span4">
+	</div>
+</div>
+
+<div class="pagination">
+  <ul>
+		<% @iterations.each do |iteration| %>
+		    <li><%= link_to iteration.id, project_iteration_path(@project, iteration) %></li>
+		<% end %>
+  </ul>
+</div>
+
+
+<div class="row">
+	<div class="span8">
+		<div>
 		  <h3>Stories</h3>
 		</div>
 	</div>
@@ -79,8 +98,6 @@
 	    <th>#</th>
 	    <th>Priority</th>
 	    <th>Name</th>
-			<th>Description</th>
-	    <th>Definition of done</th>
 	    <th>Category</th>
 			<th>Estimated difficulty</th>
 	    <th>Status</th>
@@ -92,44 +109,9 @@
 			<td><%= story.id %></td>
 			<td><%= story.priority %></td>
 	    <td><%= link_to story.name, project_story_path(@project, story) %></td>
-	    <td><%= story.description %></td>
-	    <td><%= story.definition_of_done %></td>
 			<td><%= story.category %></td>
 	    <td><%= story.estimated_difficulty %></td>
 			<td><%= story.status %></td>
-	  </tr>
-	<% end %>
-	</tbody>
-</table>
-
-<div class="row">
-	<div class="span8">
-		<div>
-		  <h3>Iterations</h3>
-		</div>
-	</div>
-	<div class="span4">
-	</div>
-</div>
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-	    <th>#</th>
-	    <th>Starting date</th>
-	    <th>Ending date</th>
-			<th>Notes</th>
-	    <th>Meeting</th>
-    </tr>
-  </thead>
-	<tbody>
-	<% @iterations.each do |iteration| %>
-	  <tr>
-	    <td><%= link_to iteration.id, project_iteration_path(@project, iteration) %></td>
-			<td><%= iteration.starting_date %></td>
-			<td><%= iteration.starting_date %></td>
-			<td><%= iteration.notes %></td>
-			<td><%= iteration.meeting %></td>
 	  </tr>
 	<% end %>
 	</tbody>

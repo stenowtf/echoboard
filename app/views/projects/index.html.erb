@@ -26,7 +26,6 @@
     <tr>
 	    <th>#</th>
 	    <th>Name</th>
-	    <th>Description</th>
 			<th>Go live</th>
     </tr>
   </thead>
@@ -35,8 +34,10 @@
 	  <tr>
 			<td><%= project.id %></td>
 	    <td><%= link_to project.name, project_path(project) %></td>
-	    <td><%= project.description %></td>
-	    <td><%= project.go_live %></td>
+			<td>
+				<%= project.go_live.strftime("%A, %d %B %Y") %>
+				(<%= distance_of_time_in_words_to_now(project.go_live) %>)
+			</td>
 	  </tr>
 	<% end %>
 	</tbody>
