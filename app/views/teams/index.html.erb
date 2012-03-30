@@ -24,17 +24,13 @@
 <table class="table table-striped">
   <thead>
     <tr>
-	    <th>#</th>
 	    <th>Name</th>
-	    <th>Description</th>
     </tr>
   </thead>
 	<tbody>
 	<% @teams.each do |team| %>
 	  <tr>
-			<td><%= team.id %></td>
 	    <td><%= link_to team.name, team_path(team) %></td>
-	    <td><%= team.description %></td>
 	  </tr>
 	<% end %>
 	</tbody>

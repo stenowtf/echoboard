@@ -14,7 +14,7 @@
 	<div class="span8">
 		<div>
 		  <h2><%= @project.name %></h2>
-			<p>(<%= @project.go_live %>)</p>
+			<h6><%= distance_of_time_in_words_to_now(@project.go_live) %></h6>
 		</div>
 	</div>
 	<div class="span4">
@@ -73,12 +73,12 @@
 	</div>
 </div>
 
-<div class="pagination">
-  <ul>
+<div class="btn-toolbar">
+  <div class="btn-group">
 		<% @iterations.each do |iteration| %>
-		    <li><%= link_to iteration.id, project_iteration_path(@project, iteration) %></li>
+				<%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large" %>
 		<% end %>
-  </ul>
+  </div>
 </div>
 
 
@@ -95,23 +95,21 @@
 <table class="table table-striped">
   <thead>
     <tr>
-	    <th>#</th>
-	    <th>Priority</th>
 	    <th>Name</th>
-	    <th>Category</th>
 			<th>Estimated difficulty</th>
+	    <th>Priority</th>
 	    <th>Status</th>
+	    <th>Category</th>
     </tr>
   </thead>
 	<tbody>
 	<% @stories.each do |story| %>
 	  <tr>
-			<td><%= story.id %></td>
-			<td><%= story.priority %></td>
 	    <td><%= link_to story.name, project_story_path(@project, story) %></td>
-			<td><%= story.category %></td>
 	    <td><%= story.estimated_difficulty %></td>
+			<td><%= story.priority %></td>
 			<td><%= story.status %></td>
+			<td><%= story.category %></td>
 	  </tr>
 	<% end %>
 	</tbody>

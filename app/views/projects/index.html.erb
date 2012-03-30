@@ -24,7 +24,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-	    <th>#</th>
 	    <th>Name</th>
 			<th>Go live</th>
     </tr>
@@ -32,7 +31,6 @@
 	<tbody>
 	<% @projects.each do |project| %>
 	  <tr>
-			<td><%= project.id %></td>
 	    <td><%= link_to project.name, project_path(project) %></td>
 			<td>
 				<%= project.go_live.strftime("%A, %d %B %Y") %>
