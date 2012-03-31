@@ -63,54 +63,94 @@
   <p><%= @project.description %></p>
 </div>
 
-<div class="row">
-	<div class="span8">
-		<div>
-		  <h3>Iterations</h3>
-		</div>
-	</div>
-	<div class="span4">
-	</div>
-</div>
+<h3>Iterations</h3>
 
-<div class="btn-toolbar">
-  <div class="btn-group">
-		<% @iterations.each do |iteration| %>
-				<%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large" %>
+<% unless @iterations.empty? %>
+	<div class="btn-toolbar">
+	  <div class="btn-group">
+			<% @iterations.each do |iteration| %>
+					<%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large" %>
+			<% end %>
+	  </div>
+	</div>
+<% else %>
+	<p>No iterations yet. <%= link_to "Add the first", new_project_iteration_path(@project) %>.</p>
+<% end %>
+
+<% unless @active_stories.empty? %>
+	<h3>Active stories</h3>
+
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+		    <th>Name</th>
+				<th>Estimated difficulty</th>
+		    <th>Priority</th>
+		    <th>Status</th>
+	    </tr>
+	  </thead>
+		<tbody>
+		<% @active_stories.each do |story| %>
+		  <tr>
+		    <td><%= link_to story.name, project_story_path(@project, story) %></td>
+		    <td><%= story.estimated_difficulty %></td>
+				<td><%= story.priority %></td>
+				<td><%= story.status %></td>
+		  </tr>
 		<% end %>
-  </div>
-</div>
+		</tbody>
+	</table>
+<% else %>
+	<h3>Active stories</h3>
+	<p>No active stories. <%= link_to "Add the first", new_project_story_path(@project) %>.</p>
+<% end %>
 
+<% unless @freezed_stories.empty? %>
+	<h3>Freezed stories</h3>
 
-<div class="row">
-	<div class="span8">
-		<div>
-		  <h3>Stories</h3>
-		</div>
-	</div>
-	<div class="span4">
-	</div>
-</div>
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+		    <th>Name</th>
+				<th>Estimated difficulty</th>
+		    <th>Priority</th>
+		    <th>Status</th>
+	    </tr>
+	  </thead>
+		<tbody>
+		<% @freezed_stories.each do |story| %>
+		  <tr>
+		    <td><%= link_to story.name, project_story_path(@project, story) %></td>
+		    <td><%= story.estimated_difficulty %></td>
+				<td><%= story.priority %></td>
+				<td><%= story.status %></td>
+		  </tr>
+		<% end %>
+		</tbody>
+	</table>
+<% end %>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-	    <th>Name</th>
-			<th>Estimated difficulty</th>
-	    <th>Priority</th>
-	    <th>Status</th>
-	    <th>Category</th>
-    </tr>
-  </thead>
-	<tbody>
-	<% @stories.each do |story| %>
-	  <tr>
-	    <td><%= link_to story.name, project_story_path(@project, story) %></td>
-	    <td><%= story.estimated_difficulty %></td>
-			<td><%= story.priority %></td>
-			<td><%= story.status %></td>
-			<td><%= story.category %></td>
-	  </tr>
-	<% end %>
-	</tbody>
-</table>
+<% unless @dropped_stories.empty? %>
+	<h3>Dropped stories</h3>
+
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+		    <th>Name</th>
+				<th>Estimated difficulty</th>
+		    <th>Priority</th>
+		    <th>Status</th>
+	    </tr>
+	  </thead>
+		<tbody>
+		<% @dropped_stories.each do |story| %>
+		  <tr>
+		    <td><%= link_to story.name, project_story_path(@project, story) %></td>
+		    <td><%= story.estimated_difficulty %></td>
+				<td><%= story.priority %></td>
+				<td><%= story.status %></td>
+		  </tr>
+		<% end %>
+		</tbody>
+	</table>
+<% end %>

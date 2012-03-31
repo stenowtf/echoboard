@@ -12,7 +12,9 @@ class ProjectsController < ApplicationController
   # GET /projects/:id(.:format)
   def show
     @project = Project.find(params[:id])
-    @stories = @project.stories.all
+    @active_stories = Story.where("project_id = ? AND category = ?", params[:id], "Active")
+    @freezed_stories = Story.where("project_id = ? AND category = ?", params[:id], "Freezed")
+    @dropped_stories = Story.where("project_id = ? AND category = ?", params[:id], "Dropped")
     @iterations = @project.iterations.all
 
     respond_to do |format|
