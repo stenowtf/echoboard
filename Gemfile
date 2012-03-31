@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.2'
+gem 'rails', '3.2.3'
 gem 'thin', '1.3.1'
 gem 'jquery-rails', '2.0.1'
 gem 'simple_form', '2.0.1'
