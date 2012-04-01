@@ -63,19 +63,23 @@
   <p><%= @project.description %></p>
 </div>
 
+<hr />
+
 <h3>Iterations</h3>
 
 <% unless @iterations.empty? %>
 	<div class="btn-toolbar">
 	  <div class="btn-group">
 			<% @iterations.each do |iteration| %>
-					<%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large" %>
+			  <%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large" %>
 			<% end %>
 	  </div>
 	</div>
 <% else %>
 	<p>No iterations yet. <%= link_to "Add the first", new_project_iteration_path(@project) %>.</p>
 <% end %>
+
+<hr />
 
 <% unless @active_stories.empty? %>
 	<h3>Active stories</h3>
