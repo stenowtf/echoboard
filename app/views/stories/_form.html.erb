@@ -7,6 +7,8 @@
   <%= f.input :status, :collection => ["Backlog", "Doing", "Test", "Done"], :as => :radio_buttons, :hint => "Story status" %>
   <%= f.input :definition_of_done, :input_html => { :id => "story-dod", :class => "span6" }, :hint => "Story definition of done" %>
   <%= f.input :category, :collection => ["Active", "Freezed", "Dropped"], :as => :radio_buttons, :hint => "Story category" %>
+  <legend>Selected <%= link_to "teams", teams_path %></legend>
+	<%= f.association :teams, :collection => @teams, :as => :check_boxes %>
   <%= f.error :base %>
 	<div class="form-actions">
 		<%= f.button :submit, :class => "btn-primary" %>
