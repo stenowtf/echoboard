@@ -1,7 +1,11 @@
 class RemoveDescriptionFromStoriesAndMeetingFromIterations < ActiveRecord::Migration
-  def change
-    remove_column :stories, :description, :text
-    remove_column :iterations, :meeting, :text
+  def up
+    remove_column :stories, :description
+    remove_column :iterations, :meeting
+  end
 
+  def down
+    add_column :stories, :description, :text
+    add_column :iterations, :meeting, :text
   end
 end
