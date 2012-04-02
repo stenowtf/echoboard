@@ -25,13 +25,8 @@
 </p>
 
 <p>
-  <b>Description:</b>
-  <%= @story.description %>
-</p>
-
-<p>
   <b>Definition of done:</b>
-  <%= @story.definition_of_done %>
+  <%= @story.definition_of_done.html_safe %>
 </p>
 
 <p>

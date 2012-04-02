@@ -11,13 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120328194755) do
+ActiveRecord::Schema.define(:version => 20120402183958) do
 
   create_table "iterations", :force => true do |t|
     t.datetime "starting_date"
     t.datetime "ending_date"
     t.text     "notes"
-    t.text     "meeting"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
     t.integer  "project_id"
@@ -34,7 +33,6 @@ ActiveRecord::Schema.define(:version => 20120328194755) do
   create_table "stories", :force => true do |t|
     t.integer  "priority"
     t.string   "name"
-    t.text     "description"
     t.text     "definition_of_done"
     t.string   "category"
     t.integer  "estimated_difficulty"
