@@ -14,7 +14,7 @@
 	<div class="span8">
 		<div>
 		  <h2><%= @project.name %></h2>
-			<h6><%= distance_of_time_in_words_to_now(@project.go_live) %></h6>
+			<h6>Time: <%= distance_of_time_in_words_to_now(@project.go_live) %>.</h6>
 		</div>
 	</div>
 	<div class="span4">
@@ -60,7 +60,8 @@
 </div>
 
 <div class="well">
-  <p><%= @project.description.html_safe %></p>
+	<div><strong>Description</strong></div>
+  <div><p><%= @project.description.html_safe %></p></div>
 </div>
 
 <hr />

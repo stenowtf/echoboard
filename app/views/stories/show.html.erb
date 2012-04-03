@@ -14,34 +14,53 @@
   <i class="icon-bookmark"></i> <li class="active">“<%= @story.name %>”</li>
 </ul>
 
-<p>
-  <b>Priority:</b>
-  <%= @story.priority %>
-</p>
+<div class="row">
+	<div class="span8">
+		<h2><%= @story.name %></h2>
+		<h6>Project: <%= link_to @project.name, project_path(@project) %>.</h6>
+	</div>
+	<div class="span4">
+		<div class="btn-toolbar">
+			<div class="btn-group">
+			  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+			    <i class="icon-cog"></i> Story actions
+			    <span class="caret"></span>
+			  </a>
+			  <ul class="dropdown-menu">
+					<li>
+						<%= link_to edit_project_story_path(@project, @story) do %>
+							<i class="icon-pencil"></i> Edit story
+						<% end %>
+					</li>
+					<li>
+						<%= link_to [@project, @story], confirm: 'Are you sure?', method: :delete do %>
+							<i class="icon-remove"></i> Delete story
+						<% end %>
+					</li>
+			  </ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="well">
+	<div><strong>Definition of done</strong></div>
+	<div><%= @story.definition_of_done.html_safe %></div>
+</div>
 
 <p>
-  <b>Name:</b>
-  <%= @story.name %>
+	<strong>Priority:</strong> <span class="badge badge-info"><%= @story.priority %></span>.
+	<strong>Category:</strong> <span class="badge badge-info"><%= @story.category %></span>.
+	<strong>Estimated difficulty:</strong> <span class="badge badge-info"><%= @story.estimated_difficulty %></span>.
+	<strong>Status:</strong> <span class="badge badge-info"><%= @story.status %></span>.
 </p>
 
-<p>
-  <b>Definition of done:</b>
-  <%= @story.definition_of_done.html_safe %>
-</p>
+<hr />
 
-<p>
-  <b>Category:</b>
-  <%= @story.category %>
-</p>
+<h3>Teams involved</h3>
 
-<p>
-  <b>Estimated difficulty:</b>
-  <%= @story.estimated_difficulty %>
-</p>
-
-<p>
-  <b>Status:</b>
-  <%= @story.status %>
-</p>
-
-<%= link_to 'Edit', edit_project_story_path(@project, @story) %>
+<ul>
+	<% @story.teams_in_stories.each do |team_in_story| %>
+	  <li><i class="icon-user"></i> <%= link_to team_in_story.team.name, team_path(team_in_story.team) %></li>
+	<% end %>
+</ul>

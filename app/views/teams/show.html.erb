@@ -41,3 +41,17 @@
 <div class="well">
   <p><%= @team.description.html_safe %></p>
 </div>
+
+<hr />
+
+<h3>In projects</h3>
+
+<ul>
+	<% @team.teams_in_stories.each do |team_in_story| %>
+	  <li>
+			<i class="icon-book"></i>
+			<%= link_to team_in_story.story.project.name, project_path(team_in_story.story.project) %>
+			for <%= link_to team_in_story.story.name, project_story_path(team_in_story.story.project, team_in_story.story) %>.
+		</li>
+	<% end %>
+</ul>

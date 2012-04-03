@@ -14,19 +14,53 @@
   <i class="icon-repeat"></i> <li class="active">“<%= @project.iterations.count(:conditions => ['id < ?', @iteration.id]) %>”</li>
 </ul>
 
-<p>
-  <b>Starting date:</b>
-  <%= @iteration.starting_date %>
-</p>
+<div class="row">
+	<div class="span8">
+		<h2><%= @iteration.id %></h2>
+		<h6>Project: <%= link_to @project.name, project_path(@project) %>.</h6>
+	</div>
+	<div class="span4">
+		<div class="btn-toolbar">
+			<div class="btn-group">
+			  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+			    <i class="icon-cog"></i> Iteration actions
+			    <span class="caret"></span>
+			  </a>
+			  <ul class="dropdown-menu">
+					<li>
+						<%= link_to edit_project_iteration_path(@project, @iteration) do %>
+							<i class="icon-pencil"></i> Edit iteration
+						<% end %>
+					</li>
+					<li>
+						<%= link_to [@project, @iteration], confirm: 'Are you sure?', method: :delete do %>
+							<i class="icon-remove"></i> Delete iteration
+						<% end %>
+					</li>
+			  </ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="well">
+	<div><strong>Starting date:</strong></div>
+	<div><%= @iteration.starting_date.strftime("%A, %d %B %Y") %></div>
+	<div><strong>Ending date:</strong></div>
+	<div><%= @iteration.ending_date.strftime("%A, %d %B %Y") %></div>
+</div>
 
 <p>
-  <b>Ending date:</b>
-  <%= @iteration.ending_date %>
+  <strong>Notes:</strong>
+  <%= @iteration.notes.html_safe %>
 </p>
 
-<p>
-  <b>Notes:</b>
-  <%= @iteration.notes %>
-</p>
+<hr />
 
-<%= link_to 'Edit', edit_project_iteration_path(@project, @iteration) %>
+<h3>Stories in this iteration</h3>
+
+<ul>
+	<% @iteration.stories_in_iterations.each do |story_in_iteration| %>
+	  <li><i class="icon-bookmark"></i> <%= link_to story_in_iteration.story.name, project_story_path(@project, story_in_iteration.story) %></li>
+	<% end %>
+</ul>
