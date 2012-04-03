@@ -50,7 +50,7 @@ class IterationsController < ApplicationController
 
     respond_to do |format|
       if @iteration.update_attributes(params[:iteration])
-        format.html { redirect_to project_url(@project), notice: 'Iteration was successfully updated.' }
+        format.html { redirect_to project_iteration_url(@project, @iteration), notice: 'Iteration was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -66,7 +66,7 @@ class IterationsController < ApplicationController
     @iteration.destroy
 
     respond_to do |format|
-      format.html { redirect_to project_iterations_url(@project) }
+      format.html { redirect_to project_url(@project), notice: 'Iteration was successfully deleted.' }
       format.json { head :no_content }
     end
   end

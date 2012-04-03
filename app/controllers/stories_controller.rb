@@ -66,7 +66,7 @@ class StoriesController < ApplicationController
     @story.destroy
 
     respond_to do |format|
-      format.html { redirect_to project_stories_url(@project) }
+      format.html { redirect_to project_url(@project), notice: 'Story was successfully deleted.' }
       format.json { head :no_content }
     end
   end

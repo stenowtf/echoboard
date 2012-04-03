@@ -70,7 +70,7 @@ class TeamsController < ApplicationController
     @team.destroy
 
     respond_to do |format|
-      format.html { redirect_to teams_url }
+      format.html { redirect_to teams_url, notice: 'Team was successfully deleted.' }
       format.json { head :no_content }
     end
   end

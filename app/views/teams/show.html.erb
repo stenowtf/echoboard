@@ -51,7 +51,8 @@
 	  <li>
 			<i class="icon-book"></i>
 			<%= link_to team_in_story.story.project.name, project_path(team_in_story.story.project) %>
-			for <%= link_to team_in_story.story.name, project_story_path(team_in_story.story.project, team_in_story.story) %>.
+			for
+		  <i class="icon-bookmark"></i> <%= link_to team_in_story.story.name, project_story_path(team_in_story.story.project, team_in_story.story) %>.
 		</li>
 	<% end %>
 </ul>
