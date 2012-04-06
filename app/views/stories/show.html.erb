@@ -60,7 +60,7 @@
 <h3>Teams involved</h3>
 
 <ul>
-	<% @story.teams_in_stories.each do |team_in_story| %>
-	  <li><i class="icon-user"></i> <%= link_to team_in_story.team.name, team_path(team_in_story.team) %></li>
+	<% @story.tasks.each do |task| %>
+	  <li><i class="icon-user"></i> <%= link_to task.team.name, team_path(task.team) %></li>
 	<% end %>
 </ul>

@@ -6,12 +6,12 @@ gem 'simple_form', '2.0.1'
 gem 'rails-i18n', '0.6.2'
 gem 'pony', '1.4'
 
-gem 'jquery-rails', '2.0.1'
+gem 'jquery-rails', '2.0.2'
 
 group :assets do
   gem 'sass-rails', '3.2.5'
   gem 'bootstrap-sass', '2.0.2'
-  gem 'bootstrap-wysihtml5-rails'
+  gem 'bootstrap-wysihtml5-rails', '0.2.3'
   gem 'coffee-rails', '3.2.2'
   gem 'uglifier', '1.2.4'
 end

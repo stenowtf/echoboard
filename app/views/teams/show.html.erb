@@ -47,12 +47,12 @@
 <h3>In projects</h3>
 
 <ul>
-	<% @team.teams_in_stories.each do |team_in_story| %>
+	<% @team.tasks.each do |task| %>
 	  <li>
 			<i class="icon-book"></i>
-			<%= link_to team_in_story.story.project.name, project_path(team_in_story.story.project) %>
+			<%= link_to task.story.project.name, project_path(task.story.project) %>
 			for
-		  <i class="icon-bookmark"></i> <%= link_to team_in_story.story.name, project_story_path(team_in_story.story.project, team_in_story.story) %>.
+		  <i class="icon-bookmark"></i> <%= link_to task.story.name, project_story_path(task.story.project, task.story) %>.
 		</li>
 	<% end %>
 </ul>

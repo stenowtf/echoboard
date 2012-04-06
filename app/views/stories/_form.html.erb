@@ -4,7 +4,7 @@
   <%= f.input :name, :input_html => { :class => "span6" }, :hint => "Story name" %>
   <%= f.input :priority, :collection => 0..2, :as => :radio_buttons, :item_wrapper_class => 'inline', :hint => "Story priority" %>
   <%= f.input :estimated_difficulty, :collection => [3, 5, 8, 13, 21, 34], :as => :radio_buttons, :item_wrapper_class => 'inline' , :hint => "Story estimated difficulty" %>
-  <%= f.input :status, :collection => ["Backlog", "To do", "Doing", "Test", "Done"], :as => :radio_buttons, :item_wrapper_class => 'inline' , :hint => "Story status" %>
+  <%= f.input :status, :collection => ["Backlog", "To do", "Doing", "Test on Dev", "Test Online", "Done"], :as => :radio_buttons, :item_wrapper_class => 'inline' , :hint => "Story status" %>
   <%= f.input :definition_of_done, :input_html => { :id => "story-dod", :class => "span6" }, :hint => "Story definition of done" %>
   <%= f.input :category, :collection => ["Active", "Freezed", "Dropped"], :as => :radio_buttons, :item_wrapper_class => 'inline' , :hint => "Story category" %>
   <legend>Selected <%= link_to "teams", teams_path %></legend>

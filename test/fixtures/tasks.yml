@@ -3,7 +3,11 @@
 one:
   story_id: 1
   team_id: 1
+  name: MyString
+  description: MyText
 
 two:
   story_id: 1
   team_id: 1
+  name: MyString
+  description: MyText
