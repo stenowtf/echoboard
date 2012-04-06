@@ -39,13 +39,32 @@
 					</li>
 			  </ul>
 			</div>
+			<div class="btn-group">
+			  <a class="btn dropdown-toggle btn-primary" data-toggle="dropdown" href="#">
+			    <i class="icon-plus icon-white"></i> Add
+			    <span class="caret"></span>
+			  </a>
+			  <ul class="dropdown-menu">
+					<li>
+						<%= link_to new_project_story_task_path(@project, @story) do %>
+							<i class="icon-list-alt"></i> New task
+						<% end %>
+					</li>
+			  </ul>
+			</div>
 		</div>
 	</div>
 </div>
 
-<div class="well">
-	<div><strong>Definition of done</strong></div>
-	<div><%= @story.definition_of_done.html_safe %></div>
+<div class="row">
+	<div class="span8">
+		<div class="well">
+			<div><strong>Definition of done</strong></div>
+			<div><%= @story.definition_of_done.html_safe %></div>
+		</div>
+	</div>
+	<div class="span4">
+	</div>
 </div>
 
 <p>
@@ -61,6 +80,10 @@
 
 <ul>
 	<% @story.tasks.each do |task| %>
-	  <li><i class="icon-user"></i> <%= link_to task.team.name, team_path(task.team) %></li>
+		<li>
+	  	<i class="icon-list-alt"></i> <%= link_to task.name, project_story_task_path(task.story.project, task.story, task) %>
+			by
+			<i class="icon-user"></i> <%= link_to task.team.name, team_path(task.team) %>.
+		</li>
 	<% end %>
 </ul>

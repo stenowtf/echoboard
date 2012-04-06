@@ -1,0 +1,14 @@
+<%= simple_form_for([@project, @story, @task]) do |f| %>
+	<legend>Task data</legend>
+	<%= f.error_notification %>
+	<%= f.input :name, :input_html => { :class => "span6" }, :hint => "Task name" %>
+	<%= f.input :description, :input_html => { :id => "task-description", :class => "span6" }, :hint => "Task description" %>
+  <legend><%= link_to "Teams", teams_path %> involved</legend>
+	<%= f.association :team, :collection => @teams, :as => :check_boxes %>
+	<%= f.error :base %>
+	<div class="form-actions">
+		<%= f.button :submit, :class => "btn-primary" %>
+		<%= submit_tag "Reset", :type => :reset, :class => "btn" %>
+		or <%= link_to "go back", project_story_tasks_path(@project, @story) %>.
+  </div>
+<% end %>
