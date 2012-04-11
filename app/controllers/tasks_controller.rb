@@ -1,16 +1,4 @@
 class TasksController < ApplicationController
-  # GET /projects/:project_id/stories/:story_id/tasks(.:format)
-  def index
-    @project = Project.find(params[:project_id])
-    @story = @project.stories.find(params[:story_id])
-    @tasks = @story.tasks.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @tasks }
-    end
-  end
-
   # GET /projects/:project_id/stories/:story_id/tasks/:id(.:format)
   def show
     @project = Project.find(params[:project_id])

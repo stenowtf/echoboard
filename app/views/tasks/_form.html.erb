@@ -3,8 +3,8 @@
 	<%= f.error_notification %>
 	<%= f.input :name, :input_html => { :class => "span6" }, :hint => "Task name" %>
 	<%= f.input :description, :input_html => { :id => "task-description", :class => "span6" }, :hint => "Task description" %>
-  <legend><%= link_to "Teams", teams_path %> involved</legend>
-	<%= f.association :team, :collection => @teams, :as => :check_boxes %>
+  <legend><%= link_to "Team", teams_path %> involved</legend>
+	<%= f.association :team, :as => :radio_buttons %>
 	<%= f.error :base %>
 	<div class="form-actions">
 		<%= f.button :submit, :class => "btn-primary" %>
