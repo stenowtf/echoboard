@@ -11,7 +11,7 @@
 <div class="row">
 	<div class="span8">
 		<div class="page-header">
-		  <h1>Listing projects</h1>
+		  <h1>Projects</h1>
 		</div>
 	</div>
 	<div class="span4">
@@ -21,22 +21,23 @@
 	</div>
 </div>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-	    <th>Name</th>
-			<th>Go live</th>
-    </tr>
-  </thead>
-	<tbody>
+<ul class="thumbnails">
 	<% @projects.each do |project| %>
-	  <tr>
-	    <td><%= link_to project.name, project_path(project) %></td>
-			<td>
-				<%= project.go_live.strftime("%A, %d %B %Y") %>
-				(<%= distance_of_time_in_words_to_now(project.go_live) %>)
-			</td>
-	  </tr>
+		<li class="span3">
+		  <div class="thumbnail">
+			  <%= link_to project_path(project), :class => "thumbnail" do %>
+					<img src="http://placehold.it/260x180&text=<%= project.name %>" alt="">
+				<% end %>
+		    <div class="caption">
+		      <h5><%= project.name %></h5>
+		      <p><%= truncate(project.description) %></p>
+		      <h5>Go live</h5>
+					<p>
+						<%= project.go_live.strftime("%A, %d %B %Y") %><br />
+						(<%= distance_of_time_in_words_to_now(project.go_live) %>)
+					</p>
+				</div>
+		  </div>
+		</li>
 	<% end %>
-	</tbody>
-</table>
+</ul>

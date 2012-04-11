@@ -11,7 +11,7 @@
 <div class="row">
 	<div class="span8">
 		<div class="page-header">
-		  <h1>Listing teams</h1>
+		  <h1>Teams</h1>
 		</div>
 	</div>
 	<div class="span4">
@@ -21,17 +21,21 @@
 	</div>
 </div>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-	    <th>Name</th>
-    </tr>
-  </thead>
-	<tbody>
+<ul class="thumbnails">
 	<% @teams.each do |team| %>
-	  <tr>
-	    <td><%= link_to team.name, team_path(team) %></td>
-	  </tr>
+		<li class="span3">
+		  <div class="thumbnail">
+			  <%= link_to team_path(team), :class => "thumbnail" do %>
+					<img src="http://placehold.it/260x180&text=<%= team.name %>" alt="">
+				<% end %>
+		    <div class="caption">
+		      <h5><%= team.name %></h5>
+		      <p><%= truncate(team.description) %></p>
+		    </div>
+		  </div>
+		</li>
 	<% end %>
-	</tbody>
-</table>
+</ul>
+
+
+
