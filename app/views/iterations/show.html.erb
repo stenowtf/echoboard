@@ -66,8 +66,12 @@
 
 <h3>Stories in this iteration</h3>
 
-<ul>
-	<% @iteration.stories_in_iterations.each do |story_in_iteration| %>
-	  <li><i class="icon-bookmark"></i> <%= link_to story_in_iteration.story.name, project_story_path(@project, story_in_iteration.story) %></li>
-	<% end %>
-</ul>
+<% unless @iteration.stories_in_iterations.empty? %>
+	<ul>
+		<% @iteration.stories_in_iterations.each do |story_in_iteration| %>
+		  <li><i class="icon-bookmark"></i> <%= link_to story_in_iteration.story.name, project_story_path(@project, story_in_iteration.story) %></li>
+		<% end %>
+	</ul>
+<% else %>
+	<p>No stories.</p>
+<% end %>

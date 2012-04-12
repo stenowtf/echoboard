@@ -34,7 +34,12 @@
 		      <h5>Go live</h5>
 					<p>
 						<%= project.go_live.strftime("%A, %d %B %Y") %><br />
-						(<%= distance_of_time_in_words_to_now(project.go_live) %>)
+						Number of days left:
+							<% if project.go_live.future? %>
+							<%= (project.go_live.to_date - Date.today).to_i %>
+							<% else %>
+								<span style="color:green;">ended</span>.
+							<% end %>
 					</p>
 				</div>
 		  </div>

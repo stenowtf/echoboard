@@ -14,7 +14,13 @@
 	<div class="span8">
 		<div>
 		  <h2><%= @project.name %></h2>
-			<h6>Time: <%= distance_of_time_in_words_to_now(@project.go_live) %>.</h6>
+			<h6>Number of days left:
+				<% if @project.go_live.future? %>
+					<%= (@project.go_live.to_date - Date.today).to_i %>
+				<% else %>
+					<span style="color:green;">ended</span>.
+				<% end %>
+			</h6>
 		</div>
 	</div>
 	<div class="span4">
