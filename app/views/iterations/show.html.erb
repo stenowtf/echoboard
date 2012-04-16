@@ -17,7 +17,7 @@
 <div class="row">
 	<div class="span8">
 		<h2><%= @iteration.id %></h2>
-		<h6>Project: <%= link_to @project.name, project_path(@project) %>.</h6>
+		<h6>Project: <%= link_to @project.name, project_path(@project) %></h6>
 	</div>
 	<div class="span4">
 		<div class="btn-toolbar">
@@ -45,33 +45,50 @@
 
 
 <div class="row">
+
 	<div class="span8">
 		<div class="well">
-			<div><strong>Starting date:</strong></div>
-			<div><%= @iteration.starting_date.strftime("%A, %d %B %Y") %></div>
-			<div><strong>Ending date:</strong></div>
-			<div><%= @iteration.ending_date.strftime("%A, %d %B %Y") %></div>
+
+			<% if (@project.iterations.count(:conditions => ['id < ?', @iteration.id]) == 0) %>
+				<h6>aka “The Planning”</h6>
+			<% end %>
+			<br />
+
+			<div class="row">
+				<div class="span2">
+					<div><strong>Starting date:</strong></div>
+					<div><%= @iteration.starting_date.strftime("%A, %d %B %Y") %></div>
+				</div>
+				<div class="span2">
+					<div><strong>Ending date:</strong></div>
+					<div><%= @iteration.ending_date.strftime("%A, %d %B %Y") %></div>
+				</div>
+				<div class="span2">
+					<div>
+						<strong>Number of days:</strong> <%= (@iteration.ending_date.to_date - @iteration.starting_date.to_date).to_i %>
+					</div>
+			  </div>
+			</div>
+
 		</div>
 	</div>
+
 	<div class="span4">
+		<h3>Stories in this iteration</h3>
+		<% unless @iteration.stories_in_iterations.empty? %>
+			<ul>
+				<% @iteration.stories_in_iterations.each do |story_in_iteration| %>
+				  <li><i class="icon-bookmark"></i> <%= link_to story_in_iteration.story.name, project_story_path(@project, story_in_iteration.story) %></li>
+				<% end %>
+			</ul>
+		<% else %>
+			<p>No stories.</p>
+		<% end %>
 	</div>
+
 </div>
 
 <p>
   <strong>Notes:</strong>
   <%= @iteration.notes.html_safe %>
 </p>
-
-<hr />
-
-<h3>Stories in this iteration</h3>
-
-<% unless @iteration.stories_in_iterations.empty? %>
-	<ul>
-		<% @iteration.stories_in_iterations.each do |story_in_iteration| %>
-		  <li><i class="icon-bookmark"></i> <%= link_to story_in_iteration.story.name, project_story_path(@project, story_in_iteration.story) %></li>
-		<% end %>
-	</ul>
-<% else %>
-	<p>No stories.</p>
-<% end %>
