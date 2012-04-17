@@ -11,7 +11,7 @@
 		<i class="icon-file"></i> “<%= link_to @project.name, project_path(@project) %>”
 		<span class="divider">/</span>
 	</li>
-  <i class="icon-repeat"></i> <li class="active">Edit iteration “<%= @iteration.id %>”</li>
+  <i class="icon-repeat"></i> <li class="active">Edit iteration “<%= @project.iterations.count(:conditions => ['id < ?', @iteration.id]) %>”</li>
 </ul>
 
 <div class="row">

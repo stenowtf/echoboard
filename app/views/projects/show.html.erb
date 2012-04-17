@@ -80,7 +80,7 @@
 
 <h3>Iterations</h3>
 	<% unless (@project.iterations.empty?) %>
-		<p>Estimated number of iterations since “<%= link_to "The Planning", project_iteration_path(@project) %>”:
+		<p>Estimated number of iterations since the “<%= link_to "planning", project_iteration_path(@project) %>”:
 		<%= ((@project.go_live - @project.iterations.first.starting_date) / 7.days).to_i %></p>
 	<% end %>
 

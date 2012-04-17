@@ -1,8 +1,8 @@
 <%= simple_form_for([@project, @story, @task]) do |f| %>
 	<legend>Task data</legend>
 	<%= f.error_notification %>
-	<%= f.input :name, :input_html => { :class => "span6" }, :hint => "Task name" %>
-	<%= f.input :description, :input_html => { :id => "task-description", :class => "span6" }, :hint => "Task description" %>
+	<%= f.input :name, :input_html => { :class => "span6" } %>
+	<%= f.input :description, :input_html => { :id => "task-description", :class => "span6" } %>
   <legend><%= link_to "Team", teams_path %> involved</legend>
 	<%= f.association :team, :as => :radio_buttons %>
 	<%= f.error :base %>

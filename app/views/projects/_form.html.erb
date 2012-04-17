@@ -1,9 +1,9 @@
 <%= simple_form_for(@project) do |f| %>
 	<legend>Project data</legend>
 	<%= f.error_notification %>
-	<%= f.input :name, :input_html => { :class => "span6" }, :hint => "Project name" %>
-	<%= f.input :description, :input_html => { :id => "project-description", :class => "span6" }, :hint => "Project description" %>
-  <%= f.input :go_live, :input_html => { :class => "input-small" }, :as => :date, :hint => "Go live date" %>
+	<%= f.input :name, :input_html => { :class => "span6" } %>
+	<%= f.input :description, :input_html => { :id => "project-description", :class => "span6" } %>
+  <%= f.input :go_live, :input_html => { :class => "input-small" }, :as => :date %>
 	<%= f.error :base %>
 	<div class="form-actions">
 		<%= f.button :submit, :class => "btn-primary" %>

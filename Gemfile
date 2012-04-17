@@ -17,12 +17,12 @@ group :assets do
 end
 
 group :development do
-  gem 'sqlite3', '1.3.5'
+  gem 'sqlite3', '1.3.6'
   gem 'foreman', '0.41.0'
 end
 
 group :test do
-  gem 'sqlite3', '1.3.5'
+  gem 'sqlite3', '1.3.6'
 end
 
 group :production do

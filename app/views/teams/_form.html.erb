@@ -1,8 +1,8 @@
 <%= simple_form_for(@team) do |f| %>
 	<legend>Team data</legend>
 	<%= f.error_notification %>
-	<%= f.input :name, :input_html => { :class => "span6" }, :hint => "Team name" %>
-	<%= f.input :description, :input_html => { :id => "team-description", :class => "span6" }, :hint => "Team description" %>
+	<%= f.input :name, :input_html => { :class => "span6" } %>
+	<%= f.input :description, :input_html => { :id => "team-description", :class => "span6" } %>
 	<%= f.error :base %>
 	<div class="form-actions">
 		<%= f.button :submit, :class => "btn-primary" %>
