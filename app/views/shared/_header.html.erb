@@ -19,9 +19,14 @@
 				</li>
 			</ul>
 			<ul class="nav pull-right">
+				<li class="<%= 'active' if current_page?(status_path) %>">
+					<%= link_to status_path do %>
+						<i class="icon-info-sign icon-white"></i> Status
+					<% end %>
+				</li>
 				<li class="<%= 'active' if current_page?(help_path) %>">
 					<%= link_to help_path do %>
-						<i class="icon-info-sign icon-white"></i> Help
+						<i class="icon-question-sign icon-white"></i> Help
 					<% end %>
 				</li>
 			</ul>

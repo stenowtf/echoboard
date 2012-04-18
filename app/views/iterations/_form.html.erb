@@ -4,6 +4,8 @@
 		<% unless iteration.id.nil? %>
 		  <p class="iteration-list-p"><strong><%= @project.iterations.count(:conditions => ['id < ?', iteration.id]) %></strong>:
 			<%= iteration.starting_date.strftime("%d %B") %> — <%= iteration.ending_date.strftime("%d %B") %></p>
+		<% else %>
+			<p class="iteration-list-p">Only this one.</p>
 		<% end %>
 	<% end %>
 	<hr />
