@@ -16,6 +16,7 @@ class TasksController < ApplicationController
     @project = Project.find(params[:project_id])
     @story = @project.stories.find(params[:story_id])
     @task = @story.tasks.new
+    @teams = Team.all
 
     respond_to do |format|
       format.html # new.html.erb
