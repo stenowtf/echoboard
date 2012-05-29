@@ -24,10 +24,12 @@ end
 group :development do
   gem 'sqlite3', '1.3.6'
   gem 'foreman', '0.46.0'
+  gem 'railroady', '1.0.7'
 end
 
 group :test do
   gem 'sqlite3', '1.3.6'
+  gem 'railroady', '1.0.7'
 end
 
 group :production do
