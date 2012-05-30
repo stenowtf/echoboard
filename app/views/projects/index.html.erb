@@ -1,48 +1,50 @@
+<% content_for :head, auto_discovery_link_tag(:atom, projects_url(format: "atom")) %>
+
 <ul class="breadcrumb">
-	<li>
-		<i class="icon-home"></i> <%= link_to "Home", root_path %>
-		<span class="divider">/</span>
-	</li>
+  <li>
+    <i class="icon-home"></i> <%= link_to "Home", root_path %>
+    <span class="divider">/</span>
+  </li>
   <li class="active">
-		<i class="icon-book"></i> Projects
-	</li>
+    <i class="icon-book"></i> Projects
+  </li>
 </ul>
 
 <div class="row">
-	<div class="span8">
-		<div class="page-header">
-		  <h1>Projects</h1>
-		</div>
-	</div>
-	<div class="span4">
-		<%= link_to new_project_path, :class => "btn btn-primary" do %>
-			<i class="icon-plus icon-white"></i> New project
-		<% end %>
-	</div>
+  <div class="span8">
+    <div class="page-header">
+      <h1>Projects</h1>
+    </div>
+  </div>
+  <div class="span4">
+    <%= link_to new_project_path, :class => "btn btn-primary" do %>
+      <i class="icon-plus icon-white"></i> New project
+    <% end %>
+  </div>
 </div>
 
 <ul class="thumbnails">
-	<% @projects.each do |project| %>
-		<li class="span3">
-		  <div class="thumbnail">
-			  <%= link_to project_path(project), :class => "thumbnail" do %>
-					<img src="http://placehold.it/260x180&text=<%= project.name %>" alt="">
-				<% end %>
-		    <div class="caption">
-		      <h5><%= project.name %></h5>
-		      <p><%= truncate(project.description) %></p>
-		      <h5>Go live</h5>
-					<p>
-						<%= project.go_live.strftime("%A, %d %B %Y") %><br />
-						Number of days left:
-							<% if project.go_live.future? %>
-							<%= (project.go_live.to_date - Date.today).to_i %>
-							<% else %>
-								<span style="color:green;">ended</span>
-							<% end %>
-					</p>
-				</div>
-		  </div>
-		</li>
-	<% end %>
+  <% @projects.each do |project| %>
+    <li class="span3">
+      <div class="thumbnail">
+        <%= link_to project_path(project), :class => "thumbnail" do %>
+          <img src="http://placehold.it/260x180&text=<%= project.name %>" alt="">
+        <% end %>
+        <div class="caption">
+          <h5><%= project.name %></h5>
+          <p><%= truncate(project.description) %></p>
+          <h5>Go live</h5>
+          <p>
+            <%= project.go_live.strftime("%A, %d %B %Y") %><br />
+            Number of days left:
+              <% if project.go_live.future? %>
+              <%= (project.go_live.to_date - Date.today).to_i %>
+              <% else %>
+                <span style="color:green;">ended</span>
+              <% end %>
+          </p>
+        </div>
+      </div>
+    </li>
+  <% end %>
 </ul>

@@ -4,26 +4,27 @@
   <title>echoboard</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
-	<!--[if lt IE 9]>
-	  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
   <%= csrf_meta_tags %>
+  <%= yield :head %>
 </head>
 <body>
 
-	<%= render 'shared/header' %>
+  <%= render 'shared/header' %>
 
-	<div class="container">
-		<% flash.each do |name, msg| -%>
-			<%= display_flash(name, msg) %>
-		<% end -%>
+  <div class="container">
+    <% flash.each do |name, msg| -%>
+      <%= display_flash(name, msg) %>
+    <% end -%>
 
-		<%= yield %>
+    <%= yield %>
 
-		<hr />
+    <hr />
 
-		<%= render 'shared/footer' %>
-	</div>
+    <%= render 'shared/footer' %>
+  </div>
 
 </body>
 </html>
