@@ -1,28 +1,31 @@
 <% unless @iterations.empty? %>
-	<h6>Current iterations</h6>
-	<% @iterations.each do |iteration| %>
-		<% unless iteration.id.nil? %>
-		  <p class="iteration-list-p"><strong><%= @project.iterations.count(:conditions => ['id < ?', iteration.id]) %></strong>:
-			<%= iteration.starting_date.strftime("%d %B") %> — <%= iteration.ending_date.strftime("%d %B") %></p>
-		<% else %>
-			<p class="iteration-list-p">Only this one.</p>
-		<% end %>
-	<% end %>
-	<hr />
+  <h6>Current iterations</h6>
+
+  <% unless @iterations.empty? %>
+    <% @iterations.each do |iteration| %>
+      <% unless (iteration.id.nil?) %>
+        <p class="iteration-list-p"><strong><%= @project.iterations.count(:conditions => ['id < ?', iteration.id]) %></strong>:
+        <%= iteration.starting_date.strftime("%d %B") %> — <%= iteration.ending_date.strftime("%d %B") %></p>
+      <% end %>
+    <% end %>
+  <% else %>
+    <p class="iteration-list-p">Only this one.</p>
+  <% end %>
+  <hr />
 <% end %>
 
 <%= simple_form_for([@project, @iteration]) do |f| %>
   <legend>Iteration data</legend>
-	<%= f.error_notification %>
+  <%= f.error_notification %>
   <%= f.input :starting_date, :input_html => { :class => "input-small" }, :as => :date %>
   <%= f.input :ending_date, :input_html => { :class => "input-small" }, :as => :date %>
   <%= f.input :notes, :input_html => { :id => "iteration-notes", :class => "span6" } %>
   <legend>Selected <%= link_to "stories", project_path(@project) %></legend>
-	<%= f.association :stories, :collection => @project.stories, :as => :check_boxes %>
-	<%= f.error :base %>
-	<div class="form-actions">
-		<%= f.button :submit, :class => "btn-primary" %>
-		<%= submit_tag "Reset", :type => :reset, :class => "btn" %>
-		or <%= link_to "go back", project_path(@project) %>.
+  <%= f.association :stories, :collection => @project.stories, :as => :check_boxes %>
+  <%= f.error :base %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => "btn-primary" %>
+    <%= submit_tag "Reset", :type => :reset, :class => "btn" %>
+    or <%= link_to "go back", project_path(@project) %>.
   </div>
 <% end %>
