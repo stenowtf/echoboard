@@ -1,0 +1,11 @@
+<fieldset id="statuses">
+  <%= f.input :value, input_html: { :class => "span6" } %>
+  <div class="control-group">
+    <div class="controls">
+      <label class="checkbox inline">
+        <%= f.check_box :_destroy %>
+        Remove
+      </label>
+    </div>
+  </div>
+</fieldset>

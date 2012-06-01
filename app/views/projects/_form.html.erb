@@ -1,13 +1,20 @@
 <%= simple_form_for(@project) do |f| %>
-	<legend>Project data</legend>
-	<%= f.error_notification %>
-	<%= f.input :name, :input_html => { :class => "span6" } %>
-	<%= f.input :description, :input_html => { :id => "project-description", :class => "span6" } %>
+  <legend>Project data</legend>
+  <%= f.error_notification %>
+  <%= f.input :name, :input_html => { :class => "span6" } %>
+  <%= f.input :description, :input_html => { :id => "project-description", :class => "span6" } %>
   <%= f.input :go_live, :input_html => { :class => "input-small" }, :as => :date %>
-	<%= f.error :base %>
-	<div class="form-actions">
-		<%= f.button :submit, :class => "btn-primary" %>
-		<%= submit_tag "Reset", :type => :reset, :class => "btn" %>
-		or <%= link_to "go back", projects_path %>.
+
+  <legend>Statuses for this project</legend>
+  <%= f.fields_for :statuses do |builder| %>
+    <%= render 'status_fields', f: builder %>
+  <% end %>
+  <%= link_to_add_fields "Add status", f, :statuses %>
+
+  <%= f.error :base %>
+  <div class="form-actions">
+    <%= f.button :submit, :class => "btn-primary" %>
+    <%= submit_tag "Reset", :type => :reset, :class => "btn" %>
+    or <%= link_to "go back", projects_path %>.
   </div>
 <% end %>

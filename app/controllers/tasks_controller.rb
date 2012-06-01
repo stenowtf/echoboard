@@ -29,6 +29,7 @@ class TasksController < ApplicationController
     @project = Project.find(params[:project_id])
     @story = @project.stories.find(params[:story_id])
     @task = @story.tasks.find(params[:id])
+    @teams = Team.all
   end
 
   # POST /projects/:project_id/stories/:story_id/tasks(.:format)
