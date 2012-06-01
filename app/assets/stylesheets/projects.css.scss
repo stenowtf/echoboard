@@ -2,10 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#statuses .control-group.string {
+#statuses .control-group.string, #difficulties .control-group.string {
   margin-bottom: 0px;
 }
 
 .nested-btn {
-  margin-left: 160px;
+  margin: 0 0 10px 160px;
 }

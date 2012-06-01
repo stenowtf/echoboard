@@ -73,16 +73,40 @@
     </div>
   </div>
   <div class="span4">
+    <h3>Statuses:</h3>
+    <% unless @project.statuses.empty? %>
+      <ul>
+        <% @project.statuses.each do |status| %>
+          <li>
+            <h5><%= status.value %></h5>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No status yet. <%= link_to "Add the first", edit_project_path(@project) %>.</p>
+    <% end %>
+    <h3>Difficulties:</h3>
+    <% unless @project.difficulties.empty? %>
+      <ul>
+        <% @project.difficulties.each do |difficulty| %>
+          <li>
+            <h5><%= difficulty.value %></h5>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>No difficulties yet. <%= link_to "Add the first", edit_project_path(@project) %>.</p>
+    <% end %>
   </div>
 </div>
 
 <hr />
 
 <h3>Iterations</h3>
-  <% unless (@project.iterations.empty?) %>
-    <p>Estimated number of iterations since the “<%= link_to "planning", project_iteration_path(@project, @project.iterations.first) %>”:
-    <%= ((@project.go_live - @project.iterations.first.starting_date) / 7.days).to_i %></p>
-  <% end %>
+<% unless (@project.iterations.empty?) %>
+  <p>Estimated number of iterations since the “<%= link_to "planning", project_iteration_path(@project, @project.iterations.first) %>”:
+  <%= ((@project.go_live - @project.iterations.first.starting_date) / 7.days).to_i %></p>
+<% end %>
 
 <% unless @iterations.empty? %>
   <div class="btn-toolbar">
