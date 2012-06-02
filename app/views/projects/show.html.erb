@@ -138,9 +138,9 @@
     <% @active_stories.each do |story| %>
       <tr>
         <td><%= link_to story.name, project_story_path(@project, story) %></td>
-        <td><%= story.estimated_difficulty %></td>
+        <td><%= @project.difficulties.find(story.difficulty_id).value %></td>
         <td><%= story.priority %></td>
-        <td><%= story.status %></td>
+        <td><%= "temp status" %></td>
       </tr>
     <% end %>
     </tbody>
@@ -166,9 +166,9 @@
     <% @freezed_stories.each do |story| %>
       <tr>
         <td><%= link_to story.name, project_story_path(@project, story) %></td>
-        <td><%= story.estimated_difficulty %></td>
+        <td><%= @project.difficulties.find(story.difficulty_id).value %></td>
         <td><%= story.priority %></td>
-        <td><%= story.status %></td>
+        <td><%= "temp status" %></td>
       </tr>
     <% end %>
     </tbody>
@@ -191,9 +191,9 @@
     <% @dropped_stories.each do |story| %>
       <tr>
         <td><%= link_to story.name, project_story_path(@project, story) %></td>
-        <td><%= story.estimated_difficulty %></td>
+        <td><%= @project.difficulties.find(story.difficulty_id).value %></td>
         <td><%= story.priority %></td>
-        <td><%= story.status %></td>
+        <td><%= "temp status" %></td>
       </tr>
     <% end %>
     </tbody>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120601101948) do
+ActiveRecord::Schema.define(:version => 20120601171856) do
 
   create_table "difficulties", :force => true do |t|
     t.string   "value"
@@ -49,10 +49,9 @@ ActiveRecord::Schema.define(:version => 20120601101948) do
     t.string   "name"
     t.text     "definition_of_done"
     t.string   "category"
-    t.integer  "estimated_difficulty"
-    t.string   "status"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
+    t.integer  "difficulty_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.integer  "project_id"
   end
 

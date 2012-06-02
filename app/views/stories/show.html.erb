@@ -69,6 +69,7 @@
 
     <p><strong>Priority:</strong> <span class="badge badge-info"><%= @story.priority %></span></p>
     <p><strong>Category:</strong> <span class="badge badge-info"><%= @story.category %></span></p>
+    <p><strong>Difficulty:</strong> <span class="badge badge-info"><%= @project.difficulties.find(@story.difficulty_id).value %></span></p>
 
     <hr />
 

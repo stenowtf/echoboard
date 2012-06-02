@@ -5,6 +5,12 @@
   <%= f.input :priority, :collection => 0..2, :as => :radio_buttons, :item_wrapper_class => 'inline' %>
   <%= f.input :category, :collection => ["Active", "Freezed", "Dropped"], :as => :radio_buttons, :item_wrapper_class => 'inline' %>
   <%= f.input :definition_of_done, :input_html => { :id => "story-dod", :class => "span6" } %>
+
+  <%= f.input :difficulty_id, :collection => @project.difficulties,
+                              :as => :radio_buttons,
+                              :label_method => :value,
+                              :item_wrapper_class => 'inline' %>
+
   <%= f.error :base %>
   <div class="form-actions">
     <%= f.button :submit, :class => "btn-primary" %>
