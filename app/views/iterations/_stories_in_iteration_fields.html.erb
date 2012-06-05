@@ -1,5 +1,9 @@
 <fieldset id="story_in_iterations">
-  <i class="icon-bookmark"></i> <%= "nome storia" %>
+  <i class="icon-bookmark"></i> <%= link_to @iteration.stories_in_iterations[index].story.name, project_story_path(@project, @iteration.stories_in_iterations[index].story) %>
+  <%= f.input :status_id, collection: @project.statuses,
+                            :as => :radio_buttons,
+                            :label_method => :value,
+                            :item_wrapper_class => 'inline' %>
   <div class="control-group">
     <div class="controls">
       <label class="checkbox inline">
@@ -8,8 +12,4 @@
       </label>
     </div>
   </div>
-  <%= f.input :status_id, collection: @project.statuses,
-                            :as => :radio_buttons,
-                            :label_method => :value,
-                            :item_wrapper_class => 'inline' %>
 </fieldset>

@@ -93,8 +93,10 @@
 <h3>Stories in this iteration</h3>
 <% unless @iteration.stories_in_iterations.empty? %>
   <%= simple_form_for([@project, @iteration]) do |f| %>
-    <%= f.fields_for :stories_in_iterations do |builder| %>
-      <%= render "stories_in_iteration_fields", f: builder %>
+    <% @iteration.stories_in_iterations.each.with_index do |stories_in_iteration, index| %>
+        <%= f.fields_for :stories_in_iterations, stories_in_iteration do |builder| %>
+          <%= render "stories_in_iteration_fields", f: builder, index: index %>
+        <% end %>
     <% end %>
     <%= f.button :submit, :class => "btn-primary" %>
   <% end -%>
