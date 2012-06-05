@@ -3,7 +3,7 @@
   <%= f.error_notification %>
   <%= f.input :name, :input_html => { :class => "span6" } %>
   <%= f.input :description, :input_html => { :id => "project-description", :class => "span6" } %>
-  <%= f.input :go_live, :input_html => { :class => "input-small" }, :as => :date %>
+  <%= f.input :go_live, :input_html => { :class => "input-small" }, :as => :date, label: "Go live date" %>
 
   <legend>Statuses for this project</legend>
   <%= f.fields_for :statuses do |builder| %>

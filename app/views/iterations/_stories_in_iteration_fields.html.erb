@@ -1,0 +1,15 @@
+<fieldset id="story_in_iterations">
+  <i class="icon-bookmark"></i> <%= "nome storia" %>
+  <div class="control-group">
+    <div class="controls">
+      <label class="checkbox inline">
+        <%= f.check_box :done %>
+        Add points?
+      </label>
+    </div>
+  </div>
+  <%= f.input :status_id, collection: @project.statuses,
+                            :as => :radio_buttons,
+                            :label_method => :value,
+                            :item_wrapper_class => 'inline' %>
+</fieldset>

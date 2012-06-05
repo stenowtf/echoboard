@@ -3,6 +3,7 @@ class IterationsController < ApplicationController
   def show
     @project = Project.find(params[:project_id])
     @iteration = @project.iterations.find(params[:id])
+    @stories_in_iteration = @iteration.stories_in_iterations
 
     respond_to do |format|
       format.html # show.html.erb

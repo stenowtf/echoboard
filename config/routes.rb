@@ -6,11 +6,8 @@ Echoboard::Application.routes.draw do
     end
     resources :iterations
   end
-
   resources :teams
 
-  match '/status', to: 'pages#status'
-  match '/help', to: 'pages#help'
-  root :to => 'pages#home'
+  root to: "pages#home"
 
 end
