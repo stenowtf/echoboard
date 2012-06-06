@@ -11,22 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120602100544) do
+ActiveRecord::Schema.define(:version => 20120606114832) do
 
   create_table "difficulties", :force => true do |t|
-    t.string   "value"
+    t.integer  "value",      :limit => 255
     t.integer  "project_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "iterations", :force => true do |t|
     t.datetime "starting_date"
     t.datetime "ending_date"
     t.text     "notes"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.integer  "project_id"
+    t.integer  "iteration_points"
+    t.integer  "total_points"
   end
 
   create_table "projects", :force => true do |t|
