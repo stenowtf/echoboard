@@ -16,14 +16,20 @@
 
 <div class="row">
   <div class="span8">
-    <h2>
-      <% if (@project.iterations.count(:conditions => ['id < ?', @iteration.id]) == 0) %>
-        “The Planning”
-      <% else %>
-        <%= (@project.iterations.count(:conditions => ['id < ?', @iteration.id])).ordinalize %>
-      <% end %>
-    </h2>
-    <h6>Project: <%= link_to @project.name, project_path(@project) %></h6>
+    <div class="row">
+      <div class="span4">
+        <h2>
+          <% if (@project.iterations.count(:conditions => ['id < ?', @iteration.id]) == 0) %>
+            “The Planning”
+          <% else %>
+            <%= (@project.iterations.count(:conditions => ['id < ?', @iteration.id])).ordinalize %>
+          <% end %>
+        </h2>
+      <h6>Project: <%= link_to @project.name, project_path(@project) %></h6>
+      </div>
+      <div class="span4" id="counter">
+      </div>
+    </div>
   </div>
   <div class="span4">
     <div class="btn-toolbar">
@@ -48,7 +54,6 @@
     </div>
   </div>
 </div>
-
 
 <div class="row">
 
@@ -90,7 +95,7 @@
 
 </div>
 
-<h3>Stories in this iteration</h3>
+<h3 id="list-of-stories">Stories in this iteration</h3>
 <% unless @iteration.stories_in_iterations.empty? %>
   <%= simple_form_for([@project, @iteration]) do |f| %>
     <% @iteration.stories_in_iterations.each.with_index do |stories_in_iteration, index| %>
@@ -98,7 +103,7 @@
           <%= render "stories_in_iteration_fields", f: builder, index: index %>
         <% end %>
     <% end %>
-    <%= f.button :submit, :class => "btn-primary" %>
+    <%= f.button :submit, :class => "nested-btn" %>
   <% end -%>
 <% else %>
   <p>No stories. <%= link_to "Add some", edit_project_iteration_path(@project, @iteration) %>.</p>

@@ -8,7 +8,7 @@
     <div class="controls">
       <label class="checkbox inline">
         <%= f.check_box :done %>
-        Add points?
+        <span class="badge badge-info"><%= Difficulty.find(@iteration.stories_in_iterations[index].story.difficulty_id).value %></span> Add points?
       </label>
     </div>
   </div>
