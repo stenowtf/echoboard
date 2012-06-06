@@ -73,7 +73,7 @@
     </div>
   </div>
   <div class="span4">
-    <h3>Statuses:</h3>
+    <h3>Statuses</h3>
     <% unless @project.statuses.empty? %>
       <ul>
         <% @project.statuses.each do |status| %>
@@ -85,7 +85,7 @@
     <% else %>
       <p>No status yet. <%= link_to "Add the first", edit_project_path(@project) %>.</p>
     <% end %>
-    <h3>Difficulties:</h3>
+    <h3>Difficulties</h3>
     <% unless @project.difficulties.empty? %>
       <ul>
         <% @project.difficulties.each do |difficulty| %>

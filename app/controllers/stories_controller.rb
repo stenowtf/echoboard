@@ -3,22 +3,12 @@ class StoriesController < ApplicationController
   def show
     @project = Project.find(params[:project_id])
     @story = @project.stories.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render :json => @story }
-    end
   end
 
   # GET /projects/:project_id/stories/new(.:format)
   def new
     @project = Project.find(params[:project_id])
     @story = @project.stories.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @story }
-    end
   end
 
   # GET /projects/:project_id/stories/:id/edit(.:format)
@@ -32,14 +22,10 @@ class StoriesController < ApplicationController
     @project = Project.find(params[:project_id])
     @story = @project.stories.new(params[:story])
 
-    respond_to do |format|
-      if @story.save
-        format.html { redirect_to project_story_url(@project, @story), notice: 'Story was successfully created.' }
-        format.json { render json: @story, status: :created, location: @story }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
-      end
+    if @story.save
+      redirect_to project_url(@project), notice: 'Story was successfully created.'
+    else
+      render :new
     end
   end
 
@@ -48,14 +34,10 @@ class StoriesController < ApplicationController
     @project = Project.find(params[:project_id])
     @story = @project.stories.find(params[:id])
 
-    respond_to do |format|
-      if @story.update_attributes(params[:story])
-        format.html { redirect_to project_story_url(@project, @story), notice: 'Story was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @story.errors, status: :unprocessable_entity }
-      end
+    if @story.update_attributes(params[:story])
+      redirect_to project_story_url(@project), notice: 'Story was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -65,9 +47,6 @@ class StoriesController < ApplicationController
     @story = @project.stories.find(params[:id])
     @story.destroy
 
-    respond_to do |format|
-      format.html { redirect_to project_url(@project), notice: 'Story was successfully deleted.' }
-      format.json { head :no_content }
-    end
+    redirect_to project_url(@project), notice: 'Story was successfully deleted.'
   end
 end
