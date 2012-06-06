@@ -8,7 +8,7 @@
 
   <%= f.input :difficulty_id, :collection => @project.difficulties,
                               :as => :radio_buttons,
-                              :label_method => :value,
+                              :label_method => lambda {|v| v.value.to_s},
                               :item_wrapper_class => 'inline' %>
 
   <%= f.error :base %>
