@@ -7,7 +7,7 @@ class ChangeDifficultyValueInInteger < ActiveRecord::Migration
 
   def down
     change_table :difficulties do |t|
-      t.add :value, :string
+      t.column :value, :string
     end
   end
 end

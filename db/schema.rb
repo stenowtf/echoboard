@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120606171720) do
+ActiveRecord::Schema.define(:version => 20120607112158) do
 
   create_table "difficulties", :force => true do |t|
     t.integer  "project_id"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20120606171720) do
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
     t.integer  "project_id"
+    t.boolean  "done"
   end
 
   create_table "stories_in_iterations", :force => true do |t|
