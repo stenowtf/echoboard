@@ -21,7 +21,10 @@
   <%= f.input :ending_date, :input_html => { :class => "input-small" }, :as => :date %>
   <%= f.input :notes, :input_html => { :id => "iteration-notes", :class => "span6" } %>
   <legend>Selected <%= link_to "stories", project_path(@project) %></legend>
-  <%= f.association :stories, :collection => @project.stories, :as => :check_boxes %>
+  <%= f.association :stories,
+                    :collection => @project.stories,
+                    :label_method => lambda {|story| if story.done then story.name else story.name end},
+                    :as => :check_boxes %>
   <%= f.error :base %>
   <div class="form-actions">
     <%= f.button :submit, :class => "btn-primary" %>

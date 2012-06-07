@@ -137,7 +137,12 @@
     <tbody>
     <% @active_stories.each do |story| %>
       <tr>
-        <td><%= link_to story.name, project_story_path(@project, story) %></td>
+        <td>
+          <%= link_to story.name, project_story_path(@project, story) %>
+          <% if story.done %>
+            <i class="icon-ok"></i>
+          <% end %>
+        </td>
         <td><%= @project.difficulties.find(story.difficulty_id).value %></td>
         <td><%= story.priority %></td>
         <td><%= "temp status" %></td>
