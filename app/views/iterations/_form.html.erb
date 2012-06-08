@@ -4,7 +4,7 @@
   <% unless @iterations.empty? %>
     <% @iterations.each do |iteration| %>
       <% unless (iteration.id.nil?) %>
-        <p class="iteration-list-p"><span class="badge">#<%= @project.iterations.count(:conditions => ['id < ?', iteration.id]) %></span>
+        <p class="iteration-list-p"><i class="icon-repeat"></i> <strong><%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration) %></strong>:
         <%= iteration.starting_date.strftime("%d %B") %> — <%= iteration.ending_date.strftime("%d %B") %></p>
       <% end %>
     <% end %>
@@ -23,7 +23,7 @@
   <legend>Selected <%= link_to "stories", project_path(@project) %></legend>
   <%= f.association :stories,
                     :collection => @project.stories,
-                    :label_method => lambda {|story| if story.done then story.name else story.name end},
+                    :label_method => lambda {|story| if story.done then story.name + " (Done)" elsif story.category == "Freezed" then story.name + " (Freezed)" elsif story.category == "Dropped" then story.name + " (Dropped)" else story.name end},
                     :as => :check_boxes %>
   <%= f.error :base %>
   <div class="form-actions">

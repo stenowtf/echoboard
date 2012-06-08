@@ -122,85 +122,83 @@
 
 <hr />
 
+<h3>Stories</h3>
+<h4>Active stories</h4>
 <% unless @active_stories.empty? %>
-  <h3>Active stories</h3>
-
   <table class="table">
     <thead>
       <tr>
         <th width="50%">Name</th>
-        <th width="20%">Estimated difficulty</th>
-        <th width="15%">Priority</th>
-        <th width="15%">Status</th>
+        <th width="40%">In which Iterations</th>
+        <th width="10%">Difficulty</th>
       </tr>
     </thead>
     <tbody>
     <% @active_stories.each do |story| %>
       <tr>
         <td>
-          <%= link_to story.name, project_story_path(@project, story) %>
+          <i class="icon-bookmark"></i> <%= link_to story.name, project_story_path(@project, story) %>
           <% if story.done %>
-            <i class="icon-ok"></i>
+            <span class="label label-success">Done</span>
+          <% end %>
+        </td>
+        <td>
+          <% unless story.stories_in_iterations.empty? %>
+            <% story.stories_in_iterations.each do |story_in_iteration| %>
+              <i class="icon-repeat"></i> <%= link_to @project.iterations.count(:conditions => ['id < ?', Iteration.find(story_in_iteration.iteration_id)]).ordinalize, project_iteration_path(@project, Iteration.find(story_in_iteration.iteration_id)) %>
+            <% end %>
+          <% else %>
+            None.
           <% end %>
         </td>
         <td><%= @project.difficulties.find(story.difficulty_id).value %></td>
-        <td><%= story.priority %></td>
-        <td><%= "temp status" %></td>
       </tr>
     <% end %>
     </tbody>
   </table>
 <% else %>
-  <h3>Active stories</h3>
   <p>No active stories. <%= link_to "Add the first", new_project_story_path(@project) %>.</p>
 <% end %>
 
-<% unless @freezed_stories.empty? %>
-  <h4>Freezed stories</h4>
+<div class="row">
+  <% unless @freezed_stories.empty? %>
+    <div class="span6">
+      <h4>Freezed stories</h4>
 
-  <table class="table table-condensed">
-    <thead>
-      <tr>
-        <th width="50%">Name</th>
-        <th width="20%">Estimated difficulty</th>
-        <th width="15%">Priority</th>
-        <th width="15%">Status</th>
-      </tr>
-    </thead>
-    <tbody>
-    <% @freezed_stories.each do |story| %>
-      <tr>
-        <td><%= link_to story.name, project_story_path(@project, story) %></td>
-        <td><%= @project.difficulties.find(story.difficulty_id).value %></td>
-        <td><%= story.priority %></td>
-        <td><%= "temp status" %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-<% end %>
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th width="100%">Name</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @freezed_stories.each do |story| %>
+          <tr>
+            <td><i class="icon-bookmark"></i> <%= link_to story.name, project_story_path(@project, story) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+  <% unless @dropped_stories.empty? %>
+    <div class="span6">
+      <h4>Dropped stories</h4>
 
-<% unless @dropped_stories.empty? %>
-  <h4>Dropped stories</h4>
-
-  <table class="table table-condensed">
-    <thead>
-      <tr>
-        <th width="50%">Name</th>
-        <th width="20%">Estimated difficulty</th>
-        <th width="15%">Priority</th>
-        <th width="15%">Status</th>
-      </tr>
-    </thead>
-    <tbody>
-    <% @dropped_stories.each do |story| %>
-      <tr>
-        <td><%= link_to story.name, project_story_path(@project, story) %></td>
-        <td><%= @project.difficulties.find(story.difficulty_id).value %></td>
-        <td><%= story.priority %></td>
-        <td><%= "temp status" %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-<% end %>
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th width="100%">Name</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @dropped_stories.each do |story| %>
+          <tr>
+            <td><i class="icon-bookmark"></i> <%= link_to story.name, project_story_path(@project, story) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>
