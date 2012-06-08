@@ -45,17 +45,23 @@
 		</div>
 	</div>
 	<div class="span4">
-		<h3>Involved in:</h3>
+		<h3>People</h3>
+		<p>TODO?</p>
+	</div>
+</div>
 
+<div class="row">
+	<div class="span8">
+		<h3>Involved in</h3>
 		<% unless @team.tasks.empty? %>
 			<ul>
 				<% @team.tasks.each do |task| %>
 				  <li>
 						<i class="icon-book"></i>
 						<%= link_to task.story.project.name, project_path(task.story.project) %>
-						for <br />
+						for
 					  <i class="icon-bookmark"></i> <%= link_to task.story.name, project_story_path(task.story.project, task.story) %>
-						in <br />
+						in
 					  <i class="icon-list-alt"></i> <%= link_to task.name, project_story_task_path(task.story.project, task.story, task) %>
 					</li>
 				<% end %>
@@ -63,6 +69,7 @@
 		<% else %>
 			<p>Nothing…</p>
 		<% end %>
-
+	</div>
+	<div class="span4">
 	</div>
 </div>
