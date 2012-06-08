@@ -3,6 +3,8 @@ class Iteration < ActiveRecord::Base
   has_many :stories_in_iterations
   has_many :stories, through: :stories_in_iterations
 
+  default_scope :order => "id asc"
+
   accepts_nested_attributes_for :stories_in_iterations, allow_destroy: true
 
   after_save :update_iteration_points, :update_total_points, :update_completed_stories
