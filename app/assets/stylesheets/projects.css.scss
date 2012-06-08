@@ -2,6 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#statuses .control-group.string, #difficulties .control-group.string {
+#statuses .control-group.string, #difficulties .control-group.integer {
   margin-bottom: 0px;
 }

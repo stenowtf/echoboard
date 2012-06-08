@@ -104,7 +104,7 @@
           <%= render "stories_in_iteration_fields", f: builder, index: index %>
         <% end %>
     <% end %>
-    <%= f.button :submit, :class => "nested-btn" %>
+    <%= f.button :submit, :class => "btn-primary nested-btn" %>
   <% end -%>
 <% else %>
   <p>No stories. <%= link_to "Add some", edit_project_iteration_path(@project, @iteration) %>.</p>
