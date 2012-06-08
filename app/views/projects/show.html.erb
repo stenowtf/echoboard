@@ -12,15 +12,20 @@
 
 <div class="row">
   <div class="span8">
-    <div>
-      <h2><%= @project.name %></h2>
-      <h6>Number of days left:
-        <% if @project.go_live.future? %>
-          <%= (@project.go_live.to_date - Date.today).to_i %>
-        <% else %>
-          <span style="color:green;">ended</span>
-        <% end %>
-      </h6>
+    <div class="row">
+      <div class="span7">
+        <h2><%= @project.name %></h2>
+        <h6>Number of days left:
+          <% if @project.go_live.future? %>
+            <%= (@project.go_live.to_date - Date.today).to_i %>
+          <% else %>
+            <span style="color:green;">ended</span>
+          <% end %>
+        </h6>
+      </div>
+      <div class="span1" id="counter">
+        <h2><%= @project.current_points %>/<%= @project.total_points %></h2>
+      </div>
     </div>
   </div>
   <div class="span4">
@@ -168,13 +173,15 @@
       <table class="table table-condensed">
         <thead>
           <tr>
-            <th width="100%">Name</th>
+            <th width="80%">Name</th>
+            <th width="20%">Difficulty</th>
           </tr>
         </thead>
         <tbody>
         <% @freezed_stories.each do |story| %>
           <tr>
             <td><i class="icon-bookmark"></i> <%= link_to story.name, project_story_path(@project, story) %></td>
+            <td><%= @project.difficulties.find(story.difficulty_id).value %></td>
           </tr>
         <% end %>
         </tbody>
@@ -188,13 +195,15 @@
       <table class="table table-condensed">
         <thead>
           <tr>
-            <th width="100%">Name</th>
+            <th width="80%">Name</th>
+            <th width="20%">Difficulty</th>
           </tr>
         </thead>
         <tbody>
         <% @dropped_stories.each do |story| %>
           <tr>
             <td><i class="icon-bookmark"></i> <%= link_to story.name, project_story_path(@project, story) %></td>
+            <td><%= @project.difficulties.find(story.difficulty_id).value %></td>
           </tr>
         <% end %>
         </tbody>

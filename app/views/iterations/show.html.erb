@@ -17,7 +17,7 @@
 <div class="row">
   <div class="span8">
     <div class="row">
-      <div class="span4">
+      <div class="span7">
         <h2>
           <% if (@project.iterations.count(:conditions => ['id < ?', @iteration.id]) == 0) %>
             “The Planning”
@@ -27,7 +27,7 @@
         </h2>
       <h6>Project: <%= link_to @project.name, project_path(@project) %></h6>
       </div>
-      <div class="span4" id="counter">
+      <div class="span1" id="counter">
         <h2><%= @iteration.iteration_points %>/<%= @iteration.total_points %></h2>
       </div>
     </div>

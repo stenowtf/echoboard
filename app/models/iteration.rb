@@ -7,7 +7,8 @@ class Iteration < ActiveRecord::Base
 
   accepts_nested_attributes_for :stories_in_iterations, allow_destroy: true
 
-  after_save :update_iteration_points, :update_total_points, :update_completed_stories
+  after_save :update_iteration_points, :update_total_points,
+             :update_completed_stories, :update_project_points
 
   private
 
@@ -33,5 +34,13 @@ class Iteration < ActiveRecord::Base
           Story.find(story_in_iteration.story_id).update_column(:done, true)
         end
       end
+    end
+
+    def update_project_points
+      value = 0
+      Iteration.where("project_id = ?", self.project_id).each do |iteration|
+        value += iteration.iteration_points
+      end
+      self.project.update_column(:current_points, value)
     end
 end
