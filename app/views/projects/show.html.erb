@@ -15,13 +15,6 @@
     <div class="row">
       <div class="span7">
         <h2><%= @project.name %></h2>
-        <h6>Number of days left:
-          <% if @project.go_live.future? %>
-            <%= (@project.go_live.to_date - Date.today).to_i %>
-          <% else %>
-            <span style="color:green;">ended</span>
-          <% end %>
-        </h6>
       </div>
       <div class="span1" id="counter">
         <h2><%= @project.current_points %>/<%= @project.total_points %></h2>
@@ -71,143 +64,199 @@
 </div>
 
 <div class="row">
-  <div class="span8">
-    <div class="well">
-      <div><strong>Description</strong></div>
-      <div><p><%= @project.description.html_safe %></p></div>
-    </div>
-  </div>
-  <div class="span4">
-    <h3>Statuses</h3>
-    <% unless @project.statuses.empty? %>
-      <ul>
-        <% @project.statuses.each do |status| %>
-          <li>
-            <h5><%= status.value %></h5>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p>No status yet. <%= link_to "Add the first", edit_project_path(@project) %>.</p>
-    <% end %>
-    <h3>Difficulties</h3>
-    <% unless @project.difficulties.empty? %>
-      <ul>
-        <% @project.difficulties.each do |difficulty| %>
-          <li>
-            <h5><%= difficulty.value %></h5>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p>No difficulties yet. <%= link_to "Add the first", edit_project_path(@project) %>.</p>
-    <% end %>
+  <div class="span12">
+    <ul class="nav nav-tabs">
+      <li><a href="#tab-description" data-toggle="tab"><i class="icon-font"></i> Description</a></li>
+      <li class="active"><a href="#tab-backlog" data-toggle="tab"><i class="icon-bookmark"></i> Backlog</a></li>
+      <li><a href="#tab-iterations" data-toggle="tab"><i class="icon-repeat"></i> Iterations</a></li>
+      <li><a href="#tab-graph" data-toggle="tab"><i class="icon-tasks"></i> Graph</a></li>
+      <li><a href="#tab-comments" data-toggle="tab"><i class="icon-comment"></i> Comments</a></li>
+    </ul>
   </div>
 </div>
+<div class="row">
+  <div class="tab-content">
+    <div class="tab-pane" id="tab-description">
+      <div class="span8">
+        <h6>Number of days left:
+          <% if @project.go_live.future? %>
+            <%= (@project.go_live.to_date - Date.today).to_i %>
+          <% else %>
+            <span style="color:green;">ended</span>
+          <% end %>
+        </h6>
+        <div class="well">
+          <div><strong>Description</strong></div>
+          <div><p><%= @project.description.html_safe %></p></div>
+        </div>
+      </div>
+      <div class="span4">
+        <h3>Statuses</h3>
+        <% unless @project.statuses.empty? %>
+          <ul>
+            <% @project.statuses.each do |status| %>
+              <li>
+                <h5><%= status.value %></h5>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>No status yet. <%= link_to "Add the first", edit_project_path(@project) %>.</p>
+        <% end %>
+        <h3>Difficulties</h3>
+        <% unless @project.difficulties.empty? %>
+          <ul>
+            <% @project.difficulties.each do |difficulty| %>
+              <li>
+                <h5><%= difficulty.value %></h5>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>No difficulties yet. <%= link_to "Add the first", edit_project_path(@project) %>.</p>
+        <% end %>
+      </div>
+    </div>
+    <div class="tab-pane active" id="tab-backlog">
+      <div class="span12">
+        <h3>Stories</h3>
+        <h4>Active stories</h4>
+        <% unless @active_stories.empty? %>
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="50%">Name</th>
+                <th width="40%">In which iterations</th>
+                <th width="10%">Difficulty</th>
+              </tr>
+            </thead>
+            <tbody>
+            <% @active_stories.each do |story| %>
+              <tr>
+                <td>
+                  <i class="icon-bookmark"></i> <%= link_to story.name, project_story_path(@project, story) %>
+                  <% if story.done %>
+                    <span class="label label-success">Done</span>
+                  <% end %>
+                </td>
+                <td>
+                  <% unless story.stories_in_iterations.empty? %>
+                    <% story.stories_in_iterations.each do |story_in_iteration| %>
+                      <i class="icon-repeat"></i> <%= link_to @project.iterations.count(:conditions => ['id < ?', Iteration.find(story_in_iteration.iteration_id)]).ordinalize, project_iteration_path(@project, Iteration.find(story_in_iteration.iteration_id)) %>
+                    <% end %>
+                  <% else %>
+                    None.
+                  <% end %>
+                </td>
+                <td><%= @project.difficulties.find(story.difficulty_id).value %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        <% else %>
+          <p>No active stories. <%= link_to "Add the first", new_project_story_path(@project) %>.</p>
+        <% end %>
 
-<hr />
+        <div class="row">
+          <% unless @freezed_stories.empty? %>
+            <div class="span6">
+              <h4>Freezed stories</h4>
 
-<h3>Iterations</h3>
-<% unless (@project.iterations.empty?) %>
-  <p>Estimated number of iterations since the “<%= link_to "planning", project_iteration_path(@project, @project.iterations.first) %>”:
-  <%= ((@project.go_live - @project.iterations.first.starting_date) / 7.days).to_i %></p>
-<% end %>
+              <table class="table table-condensed">
+                <thead>
+                  <tr>
+                    <th width="80%">Name</th>
+                    <th width="20%">Difficulty</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <% @freezed_stories.each do |story| %>
+                  <tr>
+                    <td><i class="icon-bookmark"></i> <%= link_to story.name, project_story_path(@project, story) %></td>
+                    <td><%= @project.difficulties.find(story.difficulty_id).value %></td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% end %>
+          <% unless @dropped_stories.empty? %>
+            <div class="span6">
+              <h4>Dropped stories</h4>
 
-<% unless @iterations.empty? %>
-  <div class="btn-toolbar">
-    <div class="btn-group">
-      <% @iterations.each do |iteration| %>
-        <%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large" %>
-      <% end %>
+              <table class="table table-condensed">
+                <thead>
+                  <tr>
+                    <th width="80%">Name</th>
+                    <th width="20%">Difficulty</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <% @dropped_stories.each do |story| %>
+                  <tr>
+                    <td><i class="icon-bookmark"></i> <%= link_to story.name, project_story_path(@project, story) %></td>
+                    <td><%= @project.difficulties.find(story.difficulty_id).value %></td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="tab-iterations">
+      <div class="span12">
+        <h3>Iterations</h3>
+        <% unless (@project.iterations.empty?) %>
+          <p>Estimated number of iterations since the “<%= link_to "planning", project_iteration_path(@project, @project.iterations.first) %>”:
+          <%= ((@project.go_live - @project.iterations.first.starting_date) / 7.days).to_i %></p>
+        <% end %>
+
+        <% unless @iterations.empty? %>
+          <div class="btn-toolbar">
+            <div class="btn-group">
+              <% @iterations.each do |iteration| %>
+                <%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large" %>
+              <% end %>
+            </div>
+          </div>
+        <% else %>
+          <p>No iterations yet. <%= link_to "Add the first", new_project_iteration_path(@project) %>.</p>
+        <% end %>
+      </div>
+    </div>
+    <div class="tab-pane" id="tab-graph">
+      <div class="span12">
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+          google.load("visualization", "1", {packages:["corechart"]});
+          google.setOnLoadCallback(drawChart);
+          function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+              ['Iterations', 'Ideal trend', 'Current trend'],
+              ['0',  0,      0],
+              ['1',  25,      20],
+              ['2',  50,       25],
+              ['3',  75,      80],
+              ['4',  100,      80]
+            ]);
+
+            var options = {
+              title: 'Project performance'
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('chart-div'));
+            chart.draw(data, options);
+          }
+        </script>
+        <div id="chart-div" class="span11"></div>
+      </div>
+    </div>
+    <div class="tab-pane" id="tab-comments">
+      <div class="span12">
+        mao!
+      </div>
     </div>
   </div>
-<% else %>
-  <p>No iterations yet. <%= link_to "Add the first", new_project_iteration_path(@project) %>.</p>
-<% end %>
-
-<hr />
-
-<h3>Stories</h3>
-<h4>Active stories</h4>
-<% unless @active_stories.empty? %>
-  <table class="table">
-    <thead>
-      <tr>
-        <th width="50%">Name</th>
-        <th width="40%">In which iterations</th>
-        <th width="10%">Difficulty</th>
-      </tr>
-    </thead>
-    <tbody>
-    <% @active_stories.each do |story| %>
-      <tr>
-        <td>
-          <i class="icon-bookmark"></i> <%= link_to story.name, project_story_path(@project, story) %>
-          <% if story.done %>
-            <span class="label label-success">Done</span>
-          <% end %>
-        </td>
-        <td>
-          <% unless story.stories_in_iterations.empty? %>
-            <% story.stories_in_iterations.each do |story_in_iteration| %>
-              <i class="icon-repeat"></i> <%= link_to @project.iterations.count(:conditions => ['id < ?', Iteration.find(story_in_iteration.iteration_id)]).ordinalize, project_iteration_path(@project, Iteration.find(story_in_iteration.iteration_id)) %>
-            <% end %>
-          <% else %>
-            None.
-          <% end %>
-        </td>
-        <td><%= @project.difficulties.find(story.difficulty_id).value %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>No active stories. <%= link_to "Add the first", new_project_story_path(@project) %>.</p>
-<% end %>
-
-<div class="row">
-  <% unless @freezed_stories.empty? %>
-    <div class="span6">
-      <h4>Freezed stories</h4>
-
-      <table class="table table-condensed">
-        <thead>
-          <tr>
-            <th width="80%">Name</th>
-            <th width="20%">Difficulty</th>
-          </tr>
-        </thead>
-        <tbody>
-        <% @freezed_stories.each do |story| %>
-          <tr>
-            <td><i class="icon-bookmark"></i> <%= link_to story.name, project_story_path(@project, story) %></td>
-            <td><%= @project.difficulties.find(story.difficulty_id).value %></td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-  <% end %>
-  <% unless @dropped_stories.empty? %>
-    <div class="span6">
-      <h4>Dropped stories</h4>
-
-      <table class="table table-condensed">
-        <thead>
-          <tr>
-            <th width="80%">Name</th>
-            <th width="20%">Difficulty</th>
-          </tr>
-        </thead>
-        <tbody>
-        <% @dropped_stories.each do |story| %>
-          <tr>
-            <td><i class="icon-bookmark"></i> <%= link_to story.name, project_story_path(@project, story) %></td>
-            <td><%= @project.difficulties.find(story.difficulty_id).value %></td>
-          </tr>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-  <% end %>
 </div>

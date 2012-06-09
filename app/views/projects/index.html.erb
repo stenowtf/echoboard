@@ -32,7 +32,7 @@
         <% end %>
         <div class="caption">
           <h5><%= project.name %></h5>
-          <p><%= truncate(project.description) %></p>
+          <p><%= strip_tags(truncate(project.description)) %></p>
           <h5>Go live</h5>
           <p>
             <%= project.go_live.strftime("%A, %d %B %Y") %><br />
