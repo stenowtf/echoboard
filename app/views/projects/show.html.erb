@@ -85,6 +85,8 @@
             <span style="color:green;">ended</span>
           <% end %>
         </h6>
+      </div>
+      <div class="span8">
         <div class="well">
           <div><strong>Description</strong></div>
           <div><p><%= @project.description.html_safe %></p></div>
@@ -235,22 +237,27 @@
           function drawChart() {
             var data = google.visualization.arrayToDataTable([
               ['Iterations', 'Ideal trend', 'Current trend'],
-              ['0',  0,      0],
-              ['1',  25,      20],
-              ['2',  50,       25],
-              ['3',  75,      80],
-              ['4',  100,      80]
+              ['0', 0, 0],
+              ['1', 5, 3],
+              ['2', 10, 7],
+              ['3', 15, null],
+              ['4', 20, null]
             ]);
 
             var options = {
-              title: 'Project performance'
+              focusTarget: 'category',
+              pointSize: 4,
+              height: 500,
+              width: 940,
+              legend: { position: 'none' },
+              theme: 'maximized'
             };
 
             var chart = new google.visualization.LineChart(document.getElementById('chart-div'));
             chart.draw(data, options);
           }
         </script>
-        <div id="chart-div" class="span11"></div>
+        <div id="chart-div"></div>
       </div>
     </div>
     <div class="tab-pane" id="tab-comments">
