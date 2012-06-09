@@ -235,22 +235,40 @@
           google.load("visualization", "1", {packages:["corechart"]});
           google.setOnLoadCallback(drawChart);
           function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-              ['Iterations', 'Ideal trend', 'Current trend'],
-              ['0', 0, 0],
-              ['1', 5, 3],
-              ['2', 10, 7],
-              ['3', 15, null],
-              ['4', 20, null]
-            ]);
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('number', 'Iterations');
+            data.addColumn('number', 'Project scope');
+            data.addColumn('number', 'Ideal trend');
+            data.addColumn('number', 'Current trend');
+
+            var numberOfIterations = <%= @iterations.count %>;
+            var projectTotalPoints = <%= @project.total_points %>;
+            var idealTrendPointsForIteration = (projectTotalPoints) / (numberOfIterations - 1);
+
+            data.addRows(numberOfIterations + 1);
+
+            var accumulator = 0;
+
+            <% @iterations.each_with_index do |iteration, index| %>
+              data.setCell(<%= index %>, 0, <%= index %>);
+              data.setCell(<%= index %>, 1, projectTotalPoints );
+              data.setCell(<%= index %>, 2, idealTrendPointsForIteration * <%= index %>);
+              accumulator += <%= iteration.iteration_points %>;
+              data.setCell(<%= index %>, 3, accumulator);
+            <% end %>
 
             var options = {
-              focusTarget: 'category',
+              chartArea: { height: '90%', width: '90%' },
               pointSize: 4,
+              colors: ['green','blue', 'red'],
+              series: { 0: { pointSize: 0 } },
               height: 500,
               width: 940,
               legend: { position: 'none' },
-              theme: 'maximized'
+              axisTitlesPosition: 'in',
+              hAxis: { gridlines: { count: numberOfIterations } },
+              vAxis: { gridlines: { count: numberOfIterations, minValue: 0, maxValue: projectTotalPoints } }
             };
 
             var chart = new google.visualization.LineChart(document.getElementById('chart-div'));

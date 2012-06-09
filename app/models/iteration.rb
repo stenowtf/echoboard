@@ -9,7 +9,6 @@ class Iteration < ActiveRecord::Base
 
   after_save :update_iteration_current_points, :update_iteration_total_points,
              :update_completed_stories, :update_project_current_points
-             # :update_project_total_points
 
   private
 
@@ -33,6 +32,8 @@ class Iteration < ActiveRecord::Base
       self.stories_in_iterations.each do |story_in_iteration|
         if story_in_iteration.done
           Story.find(story_in_iteration.story_id).update_column(:done, true)
+        else
+          Story.find(story_in_iteration.story_id).update_column(:done, false)
         end
       end
     end
@@ -44,12 +45,4 @@ class Iteration < ActiveRecord::Base
       end
       self.project.update_column(:current_points, value)
     end
-
-    # def update_project_total_points
-    #   value = 0
-    #   Story.where("project_id = ? and category = ?", self.project_id, "Active").each do |story|
-    #     value += Difficulty.find(story.difficulty_id).value
-    #   end
-    #   self.project.update_column(:total_points, value)
-    # end
 end

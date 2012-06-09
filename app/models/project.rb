@@ -8,7 +8,7 @@ class Project < ActiveRecord::Base
   accepts_nested_attributes_for :statuses,     allow_destroy: true
   accepts_nested_attributes_for :difficulties, allow_destroy: true
 
-  after_save :update_project_total_points
+  after_save :update_project_total_points, :update_project_current_points
 
   private
 
@@ -18,5 +18,14 @@ class Project < ActiveRecord::Base
         value += Difficulty.find(story.difficulty_id).value
       end
       self.update_column(:total_points, value)
+    end
+
+    def update_project_current_points
+      value = 0
+      Iteration.where("project_id = ?", self.id).each do |iteration|
+        iteration.save!
+        value += iteration.iteration_points
+      end
+      self.update_column(:current_points, value)
     end
 end
