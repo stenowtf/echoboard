@@ -89,7 +89,7 @@
       <p>No tasks yet. <%= link_to "Add the first", new_project_story_task_path(@project, @story, @task) %>.</p>
     <% end %>
 
-    <h3>Present in these Iterations</h3>
+    <h3>Present in these iterations</h3>
     <% unless @story.stories_in_iterations.empty? %>
       <ul>
         <% @story.stories_in_iterations.each do |story_in_iteration| %>

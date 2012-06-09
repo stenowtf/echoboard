@@ -7,13 +7,13 @@ class Story < ActiveRecord::Base
 
   default_scope :order => "name asc"
 
-  after_save :update_total_points
+  after_save :update_project_total_points
 
   private
 
-    def update_total_points
+    def update_project_total_points
       value = 0
-      Story.where("project_id = ?", self.project_id).each do |story|
+      Story.where("project_id = ? and category = ?", self.project_id, "Active").each do |story|
         value += Difficulty.find(story.difficulty_id).value
       end
       self.project.update_column(:total_points, value)
