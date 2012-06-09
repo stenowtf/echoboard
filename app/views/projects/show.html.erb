@@ -141,7 +141,7 @@
                 </td>
                 <td>
                   <% unless story.stories_in_iterations.empty? %>
-                    <% story.stories_in_iterations.each do |story_in_iteration| %>
+                    <% story.stories_in_iterations.order("id").each do |story_in_iteration| %>
                       <i class="icon-repeat"></i> <%= link_to @project.iterations.count(:conditions => ['id < ?', Iteration.find(story_in_iteration.iteration_id)]).ordinalize, project_iteration_path(@project, Iteration.find(story_in_iteration.iteration_id)) %>
                     <% end %>
                   <% else %>

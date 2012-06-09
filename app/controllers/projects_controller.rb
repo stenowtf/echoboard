@@ -10,7 +10,7 @@ class ProjectsController < ApplicationController
     @active_stories = Story.where("project_id = ? AND category = ?", params[:id], "Active")
     @freezed_stories = Story.where("project_id = ? AND category = ?", params[:id], "Freezed")
     @dropped_stories = Story.where("project_id = ? AND category = ?", params[:id], "Dropped")
-    @iterations = @project.iterations.all
+    @iterations = @project.iterations.order("id")
   end
 
   # GET /projects/new(.:format)
