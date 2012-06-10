@@ -209,23 +209,45 @@
     </div>
     <div class="tab-pane" id="tab-iterations">
       <div class="span12">
-        <h3>Iterations</h3>
-        <% unless (@project.iterations.empty?) %>
-          <p>Estimated number of iterations since the “<%= link_to "planning", project_iteration_path(@project, @project.iterations.first) %>”:
-          <%= ((@project.go_live - @project.iterations.first.starting_date) / 7.days).to_i %></p>
-        <% end %>
-
-        <% unless @iterations.empty? %>
-          <% @iterations.each do |iteration| %>
-            <% if iteration.id <= @project.current_iteration_id %>
-              <%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large btn-success" %>
-            <% else %>
-              <%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large" %>
+        <div class="row">
+          <div class="span6">
+            <h3>Iterations</h3>
+            <% unless (@project.iterations.empty?) %>
+              <p>Estimated number of iterations since the “<%= link_to "planning", project_iteration_path(@project, @project.iterations.first) %>”:
+              <%= ((@project.go_live - @project.iterations.first.starting_date) / 7.days).to_i %></p>
             <% end %>
-          <% end %>
-        <% else %>
-          <p>No iterations yet. <%= link_to "Add the first", new_project_iteration_path(@project) %>.</p>
-        <% end %>
+
+            <% unless @iterations.empty? %>
+              <% @iterations.each do |iteration| %>
+                <% if iteration.id <= @project.current_iteration_id %>
+                  <%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large btn-success" %>
+                <% else %>
+                  <%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large" %>
+                <% end %>
+              <% end %>
+              <hr />
+            <% else %>
+              <p>No iterations yet. <%= link_to "Add the first", new_project_iteration_path(@project) %>.</p>
+            <% end %>
+          </div>
+          <div class="span6">
+            <% unless @iterations.empty? %>
+              <h3>Hierarchical list</h3>
+              <% @iterations.each do |iteration| %>
+                <p><i class="icon-repeat"></i> <%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]).ordinalize, project_iteration_path(@project, iteration) %>
+                </p>
+                <% iteration.stories_in_iterations.each do |story_in_iteration| %>
+                  <p style="padding-left:20px;"><i class="icon-bookmark"></i> <%= link_to story_in_iteration.story.name, project_story_path(@project, story_in_iteration.story) %></p>
+                  <% story_in_iteration.story.tasks.each do |task| %>
+                    <p style="padding-left:40px;"><i class="icon-list-alt"></i> <%= link_to task.name, project_story_task_path(@project, story_in_iteration.story, task) %>
+                      — <i class="icon-user"></i> <%= link_to task.team.name, team_path(task.team) %>
+                    </p>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
     <div class="tab-pane" id="tab-graph">
@@ -280,7 +302,7 @@
     </div>
     <div class="tab-pane" id="tab-comments">
       <div class="span12">
-        mao!
+        <p>TODO?</p>
       </div>
     </div>
   </div>
