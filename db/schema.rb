@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120608190047) do
+ActiveRecord::Schema.define(:version => 20120610102815) do
 
   create_table "difficulties", :force => true do |t|
     t.integer  "project_id"
@@ -35,10 +35,11 @@ ActiveRecord::Schema.define(:version => 20120608190047) do
     t.string   "name"
     t.text     "description"
     t.datetime "go_live"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
     t.integer  "current_points"
     t.integer  "total_points"
+    t.integer  "current_iteration_id"
   end
 
   create_table "statuses", :force => true do |t|
