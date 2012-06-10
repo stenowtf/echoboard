@@ -92,7 +92,7 @@
     <h3>Present in these iterations</h3>
     <% unless @story.stories_in_iterations.empty? %>
       <ul>
-        <% @story.stories_in_iterations.each do |story_in_iteration| %>
+        <% @story.stories_in_iterations.order("iteration_id").each do |story_in_iteration| %>
           <li>
             <i class="icon-repeat"></i> <%= link_to @project.iterations.count(:conditions => ['id < ?', Iteration.find(story_in_iteration.iteration_id)]).ordinalize, project_iteration_path(@project, Iteration.find(story_in_iteration.iteration_id)) %>
           </li>

@@ -5,7 +5,7 @@ class Story < ActiveRecord::Base
   has_many :tasks
   has_many :teams, through: :tasks
 
-  default_scope :order => "name asc"
+  default_scope :order => "name"
 
   after_save :update_project_total_points
 
