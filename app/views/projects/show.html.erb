@@ -216,13 +216,9 @@
         <% end %>
 
         <% unless @iterations.empty? %>
-          <div class="btn-toolbar">
-            <div class="btn-group">
-              <% @iterations.each do |iteration| %>
-                <%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large" %>
-              <% end %>
-            </div>
-          </div>
+          <% @iterations.each do |iteration| %>
+            <%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large" %>
+          <% end %>
         <% else %>
           <p>No iterations yet. <%= link_to "Add the first", new_project_iteration_path(@project) %>.</p>
         <% end %>
@@ -262,13 +258,13 @@
               chartArea: { height: '90%', width: '90%' },
               pointSize: 4,
               colors: ['green','blue', 'red'],
-              series: { 0: { pointSize: 0 } },
+              series: { 0: { pointSize: 0, lineWidth: 1 } },
               height: 500,
               width: 940,
               legend: { position: 'none' },
               axisTitlesPosition: 'in',
               hAxis: { gridlines: { count: numberOfIterations } },
-              vAxis: { gridlines: { count: numberOfIterations, minValue: 0, maxValue: projectTotalPoints } }
+              vAxis: { gridlines: { count: numberOfIterations } }
             };
 
             var chart = new google.visualization.LineChart(document.getElementById('chart-div'));

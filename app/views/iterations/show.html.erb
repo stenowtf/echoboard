@@ -92,6 +92,13 @@
   </div>
 
   <div class="span4">
+    <% @iterations.each do |iteration| %>
+      <% unless iteration == @iteration %>
+        <%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large" %>
+      <% else %>
+        <%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large btn-primary" %>
+      <% end %>
+    <% end %>
   </div>
 
 </div>
