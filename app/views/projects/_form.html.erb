@@ -6,8 +6,7 @@
   <%= f.input :current_iteration_id,
               :collection => @project.iterations,
               :as => :select,
-              :label_method => lambda {|iteration| @project.iterations.count(:conditions => ['id < ?', iteration.id]).ordinalize },
-              :input_html => { :class => "span1" } %>
+              :label_method => lambda {|iteration| @project.iterations.count(:conditions => ['id < ?', iteration.id]).ordinalize + " (" + iteration.starting_date.strftime("%d %B") + " — " + iteration.ending_date.strftime("%d %B") + ")" } %>
 
   <%= f.input :description, :input_html => { :id => "project-description", :class => "span6" } %>
   <%= f.input :go_live, :input_html => { :class => "input-small" }, :as => :date, label: "Go live date" %>

@@ -91,7 +91,7 @@
     </div>
   </div>
 
-  <div class="span4">
+  <div class="span4" id="iterations-buttons">
     <% @iterations.each do |iteration| %>
       <% unless iteration == @iteration %>
         <% if iteration.id <= @project.current_iteration_id %>
