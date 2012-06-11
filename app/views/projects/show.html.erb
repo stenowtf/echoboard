@@ -13,10 +13,10 @@
 <div class="row">
   <div class="span8">
     <div class="row">
-      <div class="span7">
+      <div class="span6">
         <h2><%= @project.name %></h2>
       </div>
-      <div class="span1" id="counter">
+      <div class="span2" id="counter">
         <h2><%= @project.current_points %>/<%= @project.total_points %></h2>
       </div>
     </div>
@@ -34,11 +34,11 @@
               <i class="icon-pencil"></i> Edit project
             <% end %>
           </li>
-          <li>
-            <%= link_to @project, confirm: 'Are you sure?', method: :delete do %>
+          <!--<li>
+            <%#= link_to @project, confirm: 'Are you sure?', method: :delete do %>
               <i class="icon-remove"></i> Delete project
-            <% end %>
-          </li>
+            <%# end %>
+          </li> -->
         </ul>
       </div>
       <div class="btn-group">
