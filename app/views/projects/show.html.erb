@@ -144,7 +144,7 @@
                 <td>
                   <% unless story.stories_in_iterations.empty? %>
                     <% story.stories_in_iterations.order("id").each do |story_in_iteration| %>
-                      <i class="icon-repeat"></i> <%= link_to @project.iterations.count(:conditions => ['id < ?', Iteration.find(story_in_iteration.iteration_id)]).ordinalize, project_iteration_path(@project, Iteration.find(story_in_iteration.iteration_id)) %>
+                      <i class="icon-repeat"></i> <%= link_to @project.iterations.count(:conditions => ['id <= ?', Iteration.find(story_in_iteration.iteration_id)]).ordinalize, project_iteration_path(@project, Iteration.find(story_in_iteration.iteration_id)) %>
                     <% end %>
                   <% else %>
                     None.
@@ -213,16 +213,16 @@
           <div class="span6" id="iterations-buttons">
             <h3>Iterations</h3>
             <% unless (@project.iterations.empty?) %>
-              <p>Estimated number of iterations since the “<%= link_to "planning", project_iteration_path(@project, @project.iterations.first) %>”:
+              <p>Estimated number of iterations since first iteration:
               <%= ((@project.go_live - @project.iterations.first.starting_date) / 7.days).to_i %></p>
             <% end %>
 
             <% unless @iterations.empty? %>
               <% @iterations.each do |iteration| %>
-                <% if iteration.id <= @project.current_iteration_id %>
-                  <%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large btn-success" %>
+                <% if @project.current_iteration_id != nil && iteration.id <= @project.current_iteration_id %>
+                  <%= link_to @project.iterations.count(:conditions => ['id <= ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large btn-success" %>
                 <% else %>
-                  <%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large" %>
+                  <%= link_to @project.iterations.count(:conditions => ['id <= ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large" %>
                 <% end %>
               <% end %>
               <hr />
@@ -234,7 +234,7 @@
             <% unless @iterations.empty? %>
               <h3>Hierarchical list</h3>
               <% @iterations.each do |iteration| %>
-                <p><i class="icon-repeat"></i> <%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]).ordinalize, project_iteration_path(@project, iteration) %>
+                <p><i class="icon-repeat"></i> <%= link_to @project.iterations.count(:conditions => ['id <= ?', iteration.id]).ordinalize, project_iteration_path(@project, iteration) %>
                 </p>
                 <% iteration.stories_in_iterations.each do |story_in_iteration| %>
                   <p style="padding-left:20px;"><i class="icon-bookmark"></i> <%= link_to story_in_iteration.story.name, project_story_path(@project, story_in_iteration.story) %></p>
@@ -266,18 +266,23 @@
 
             var numberOfIterations = <%= @iterations.count %>;
             var projectTotalPoints = <%= @project.total_points %>;
-            var idealTrendPointsForIteration = (projectTotalPoints) / (numberOfIterations - 1);
+            var idealTrendPointsForIteration = (projectTotalPoints) / (numberOfIterations);
 
             data.addRows(numberOfIterations + 1);
 
             var accumulator = 0;
 
+            data.setCell(0, 0, 0);
+            data.setCell(0, 1, projectTotalPoints);
+            data.setCell(0, 2, 0);
+            data.setCell(0, 3, 0);
+
             <% @iterations.each_with_index do |iteration, index| %>
-              data.setCell(<%= index %>, 0, <%= index %>);
-              data.setCell(<%= index %>, 1, projectTotalPoints );
-              data.setCell(<%= index %>, 2, idealTrendPointsForIteration * <%= index %>);
+              data.setCell(<%= index + 1 %>, 0, <%= index + 1 %>);
+              data.setCell(<%= index + 1 %>, 1, projectTotalPoints );
+              data.setCell(<%= index + 1 %>, 2, idealTrendPointsForIteration * <%= index + 1 %>);
               accumulator += <%= iteration.iteration_points %>;
-              data.setCell(<%= index %>, 3, <%= if @project.current_iteration_id >= iteration.id then "accumulator" else "null" end %>);
+              data.setCell(<%= index + 1 %>, 3, <%= if @project.current_iteration_id != nil && @project.current_iteration_id >= iteration.id then "accumulator" else "null" end %>);
             <% end %>
 
             var options = {
@@ -289,8 +294,8 @@
               width: 940,
               legend: { position: 'none' },
               axisTitlesPosition: 'in',
-              hAxis: { gridlines: { count: numberOfIterations } },
-              vAxis: { gridlines: { count: numberOfIterations } }
+              hAxis: { gridlines: { count: numberOfIterations + 1 } },
+              vAxis: { gridlines: { count: numberOfIterations + 1 } }
             };
 
             var chart = new google.visualization.LineChart(document.getElementById('chart-div'));

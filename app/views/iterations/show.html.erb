@@ -11,7 +11,7 @@
     <i class="icon-file"></i> “<%= link_to @project.name, project_path(@project) %>”
     <span class="divider">/</span>
   </li>
-  <i class="icon-repeat"></i> <li class="active">“<%= @project.iterations.count(:conditions => ['id < ?', @iteration.id]) %>”</li>
+  <i class="icon-repeat"></i> <li class="active">“<%= @project.iterations.count(:conditions => ['id <= ?', @iteration.id]) %>”</li>
 </ul>
 
 <div class="row">
@@ -19,11 +19,7 @@
     <div class="row">
       <div class="span7">
         <h2>
-          <% if (@project.iterations.count(:conditions => ['id < ?', @iteration.id]) == 0) %>
-            “The Planning”
-          <% else %>
-            <%= (@project.iterations.count(:conditions => ['id < ?', @iteration.id])).ordinalize %>
-          <% end %>
+          <%= (@project.iterations.count(:conditions => ['id <= ?', @iteration.id])).ordinalize %>
         </h2>
       <h6>Project: <%= link_to @project.name, project_path(@project) %></h6>
       </div>
@@ -95,12 +91,12 @@
     <% @iterations.each do |iteration| %>
       <% unless iteration == @iteration %>
         <% if iteration.id <= @project.current_iteration_id %>
-          <%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large btn-success" %>
+          <%= link_to @project.iterations.count(:conditions => ['id <= ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large btn-success" %>
         <% else %>
-          <%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large" %>
+          <%= link_to @project.iterations.count(:conditions => ['id <= ?', iteration.id]), project_iteration_path(@project, iteration), :class => "btn btn-large" %>
         <% end %>
       <% else %>
-        <%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), "#", :class => "btn btn-large btn-primary disabled" %>
+        <%= link_to @project.iterations.count(:conditions => ['id <= ?', iteration.id]), "#", :class => "btn btn-large btn-primary disabled" %>
       <% end %>
     <% end %>
   </div>

@@ -93,7 +93,7 @@
       <ul>
         <% @story.stories_in_iterations.order("iteration_id").each do |story_in_iteration| %>
           <li>
-            <i class="icon-repeat"></i> <%= link_to @project.iterations.count(:conditions => ['id < ?', Iteration.find(story_in_iteration.iteration_id)]).ordinalize, project_iteration_path(@project, Iteration.find(story_in_iteration.iteration_id)) %>
+            <i class="icon-repeat"></i> <%= link_to @project.iterations.count(:conditions => ['id <= ?', Iteration.find(story_in_iteration.iteration_id)]).ordinalize, project_iteration_path(@project, Iteration.find(story_in_iteration.iteration_id)) %>
           </li>
         <% end %>
       </ul>

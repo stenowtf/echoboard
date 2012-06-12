@@ -4,7 +4,7 @@
   <% unless @iterations.empty? %>
     <% @iterations.each do |iteration| %>
       <% unless (iteration.id.nil?) %>
-        <p class="iteration-list-p"><i class="icon-repeat"></i> <strong><%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration) %></strong>:
+        <p class="iteration-list-p"><i class="icon-repeat"></i> <strong><%= link_to @project.iterations.count(:conditions => ['id <= ?', iteration.id]), project_iteration_path(@project, iteration) %></strong>:
           <% if iteration == @iteration %>
             <strong>
               <%= iteration.starting_date.strftime("%d %B") %> — <%= iteration.ending_date.strftime("%d %B") %>
