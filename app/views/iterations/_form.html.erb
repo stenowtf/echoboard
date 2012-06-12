@@ -1,11 +1,24 @@
 <% unless @iterations.empty? %>
-  <h6>Current iterations</h6>
+  <h6>Iterations list</h6>
 
   <% unless @iterations.empty? %>
     <% @iterations.each do |iteration| %>
       <% unless (iteration.id.nil?) %>
         <p class="iteration-list-p"><i class="icon-repeat"></i> <strong><%= link_to @project.iterations.count(:conditions => ['id < ?', iteration.id]), project_iteration_path(@project, iteration) %></strong>:
-        <%= iteration.starting_date.strftime("%d %B") %> — <%= iteration.ending_date.strftime("%d %B") %></p>
+          <% if iteration == @iteration %>
+            <strong>
+              <%= iteration.starting_date.strftime("%d %B") %> — <%= iteration.ending_date.strftime("%d %B") %>
+            </strong>
+            <span class="label label-info">This one</span>
+          <% elsif iteration.id == @project.current_iteration_id %>
+            <strong>
+              <%= iteration.starting_date.strftime("%d %B") %> — <%= iteration.ending_date.strftime("%d %B") %>
+            </strong>
+            <span class="label label-success">Current</span>
+          <% else %>
+            <%= iteration.starting_date.strftime("%d %B") %> — <%= iteration.ending_date.strftime("%d %B") %>
+          <% end %>
+        </p>
       <% end %>
     <% end %>
   <% else %>
