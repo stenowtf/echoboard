@@ -70,7 +70,6 @@
       <li class="active"><a href="#tab-backlog" data-toggle="tab"><i class="icon-bookmark"></i> Backlog</a></li>
       <li><a href="#tab-iterations" data-toggle="tab"><i class="icon-repeat"></i> Iterations</a></li>
       <li><a href="#tab-graph" data-toggle="tab"><i class="icon-tasks"></i> Graph</a></li>
-      <li><a href="#tab-comments" data-toggle="tab"><i class="icon-comment"></i> Comments</a></li>
     </ul>
   </div>
 </div>
@@ -216,7 +215,6 @@
               <p>Estimated number of iterations since first iteration:
               <%= ((@project.go_live - @project.iterations.first.starting_date) / 7.days).to_i %></p>
             <% end %>
-
             <% unless @iterations.empty? %>
               <% @iterations.each do |iteration| %>
                 <% if @project.current_iteration_id != nil && iteration.id <= @project.current_iteration_id %>
@@ -229,6 +227,18 @@
             <% else %>
               <p>No iterations yet. <%= link_to "Add the first", new_project_iteration_path(@project) %>.</p>
             <% end %>
+
+            <%= simple_form_for(@project) do |f| %>
+              <%= f.error_notification %>
+              <%= f.input :current_iteration_id,
+                          :collection => @project.iterations,
+                          :as => :select,
+                          :label_method => lambda {|iteration| @project.iterations.count(:conditions => ['id <= ?', iteration.id]).ordinalize + " (" + iteration.starting_date.strftime("%d %B") + " — " + iteration.ending_date.strftime("%d %B") + ")" }
+              %>
+              <%= f.error :base %>
+              <%= f.button :submit, :class => "btn-primary nested-btn" %>
+            <% end %>
+
           </div>
           <div class="span6">
             <% unless @iterations.empty? %>
@@ -303,11 +313,6 @@
           }
         </script>
         <div id="chart-div"></div>
-      </div>
-    </div>
-    <div class="tab-pane" id="tab-comments">
-      <div class="span12">
-        <p>TODO?</p>
       </div>
     </div>
   </div>
