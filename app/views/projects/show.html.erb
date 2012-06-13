@@ -265,8 +265,8 @@
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript">
           google.load("visualization", "1", {packages:["corechart"]});
-          google.setOnLoadCallback(drawChart);
-          function drawChart() {
+          google.setOnLoadCallback(drawChart1);
+          function drawChart1() {
 
             var data = new google.visualization.DataTable();
             data.addColumn('number', 'Iterations');
@@ -298,8 +298,9 @@
             var options = {
               chartArea: { height: '90%', width: '90%' },
               pointSize: 4,
+              lineWidth: 3,
               colors: ['green','blue', 'red'],
-              series: { 0: { pointSize: 0, lineWidth: 1 } },
+              series: { 0: { pointSize: 0, lineWidth: 2 } },
               height: 500,
               width: 940,
               legend: { position: 'none' },
@@ -308,11 +309,44 @@
               vAxis: { gridlines: { count: numberOfIterations + 1 } }
             };
 
-            var chart = new google.visualization.LineChart(document.getElementById('chart-div'));
+            var chart = new google.visualization.LineChart(document.getElementById('chart-div-1'));
+            chart.draw(data, options);
+          }
+
+          google.setOnLoadCallback(drawChart2);
+          function drawChart2() {
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Iterations');
+            data.addColumn('number', 'Estimated velocity');
+            data.addColumn('number', 'Actual velocity');
+
+            var numberOfIterations = <%= @iterations.count %>;
+
+            data.addRows(numberOfIterations + 1);
+
+            <% @iterations.each_with_index do |iteration, index| %>
+              data.setCell(<%= index + 1 %>, 0, '<%= index + 1 %>');
+              data.setCell(<%= index + 1 %>, 1, <%= iteration.estimated_velocity %>);
+              data.setCell(<%= index + 1 %>, 2, <%= iteration.iteration_points %>);
+            <% end %>
+
+            var options = {
+              chartArea: { height: '90%', width: '90%' },
+              height: 500,
+              width: 940,
+              legend: { position: 'none' },
+              hAxis: { gridlines: { count: numberOfIterations + 1 } },
+              vAxis: { gridlines: { count: numberOfIterations + 1 } },
+              strictFirstColumnType: false
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart-div-2'));
             chart.draw(data, options);
           }
         </script>
-        <div id="chart-div"></div>
+        <div id="chart-div-1"></div>
+        <div id="chart-div-2"></div>
       </div>
     </div>
   </div>

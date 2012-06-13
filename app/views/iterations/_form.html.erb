@@ -32,6 +32,7 @@
   <%= f.error_notification %>
   <%= f.input :starting_date, :input_html => { :class => "input-small" }, :as => :date %>
   <%= f.input :ending_date, :input_html => { :class => "input-small" }, :as => :date %>
+  <%= f.input :estimated_velocity, :input_html => { :class => "span1" } %>
   <%= f.input :notes, :input_html => { :id => "iteration-notes", :class => "span6" } %>
   <legend>Selected <%= link_to "stories", project_path(@project) %></legend>
   <%= f.association :stories,

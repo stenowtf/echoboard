@@ -76,7 +76,7 @@
       <% unless @iteration.notes.empty? %>
         <br />
         <div class="row">
-          <div class="span6">
+          <div class="span7">
             <p>
               <strong>Notes:</strong>
               <%= @iteration.notes.html_safe %>
@@ -84,6 +84,20 @@
           </div>
         </div>
       <% end %>
+
+      <div class="row">
+        <div class="span7">
+          <p>
+            <strong>Estimated velocity:</strong>
+            <%= @iteration.estimated_velocity %>
+          </p>
+          <p>
+            <strong>Actual velocity:</strong>
+            <%= @iteration.iteration_points %>
+          </p>
+        </div>
+      </div>
+
     </div>
   </div>
 
