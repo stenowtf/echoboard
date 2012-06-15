@@ -274,6 +274,7 @@
             data.addColumn('number', 'Project scope');
             data.addColumn('number', 'Ideal trend');
             data.addColumn('number', 'Current trend');
+            data.addColumn('number', 'Medium trend');
 
             var numberOfIterations = <%= @iterations.count %>;
             var projectTotalPoints = <%= @project.total_points %>;
@@ -281,26 +282,28 @@
 
             data.addRows(numberOfIterations + 1);
 
-            var accumulator = 0;
+            <% accumulator = 0.0 %>
 
             data.setCell(0, 0, 0);
             data.setCell(0, 1, projectTotalPoints);
             data.setCell(0, 2, 0);
             data.setCell(0, 3, 0);
+            data.setCell(0, 4, 0);
 
             <% @iterations.each_with_index do |iteration, index| %>
               data.setCell(<%= index + 1 %>, 0, <%= index + 1 %>);
               data.setCell(<%= index + 1 %>, 1, projectTotalPoints );
               data.setCell(<%= index + 1 %>, 2, idealTrendPointsForIteration * <%= index + 1 %>);
-              accumulator += <%= iteration.iteration_points %>;
-              data.setCell(<%= index + 1 %>, 3, <%= if @project.current_iteration_id != nil && @project.current_iteration_id >= iteration.id then "accumulator" else "null" end %>);
+              <% accumulator += iteration.iteration_points %>
+              data.setCell(<%= index + 1 %>, 3, <%= if @project.current_iteration_id != nil && @project.current_iteration_id >= iteration.id then accumulator else "null" end %>);
+              data.setCell(<%= index + 1 %>, 4, <%= if @project.current_iteration_id != nil && @project.current_iteration_id >= iteration.id then accumulator / (index + 1) else "null" end %>);
             <% end %>
 
             var options = {
               chartArea: { height: '90%', width: '90%' },
               pointSize: 4,
               lineWidth: 3,
-              colors: ['green','blue', 'red'],
+              colors: ['green','blue', 'red', 'yellow'],
               series: { 0: { pointSize: 0, lineWidth: 2 } },
               height: 500,
               width: 940,
@@ -345,52 +348,9 @@
             var chart = new google.visualization.ColumnChart(document.getElementById('chart-div-2'));
             chart.draw(data, options);
           }
-
-          google.setOnLoadCallback(drawChart3);
-          function drawChart3() {
-
-            var data = new google.visualization.DataTable();
-            data.addColumn('number', 'Iterations');
-            data.addColumn('number', 'Ideal trend');
-            data.addColumn('number', 'Current trend');
-
-            var numberOfIterations = <%= @iterations.count %>;
-            var projectTotalPoints = <%= @project.total_points %>;
-            var idealTrendPointsForIteration = (projectTotalPoints) / (numberOfIterations);
-
-            data.addRows(numberOfIterations + 1);
-
-            var accumulator = 0;
-
-            data.setCell(0, 0, 0);
-            data.setCell(0, 1, 0);
-            data.setCell(0, 2, 0);
-
-            <% @iterations.each_with_index do |iteration, index| %>
-              data.setCell(<%= index + 1 %>, 0, <%= index + 1 %>);
-              data.setCell(<%= index + 1 %>, 1, idealTrendPointsForIteration * <%= index + 1 %>);
-              data.setCell(<%= index + 1 %>, 2, <%= iteration.iteration_points %>);
-            <% end %>
-
-            var options = {
-              chartArea: { height: '90%', width: '90%' },
-              pointSize: 4,
-              lineWidth: 3,
-              height: 500,
-              width: 940,
-              legend: { position: 'none' },
-              axisTitlesPosition: 'in',
-              hAxis: { gridlines: { count: numberOfIterations + 1 } },
-              vAxis: { gridlines: { count: numberOfIterations + 1 } }
-            };
-
-            var chart = new google.visualization.LineChart(document.getElementById('chart-div-3'));
-            chart.draw(data, options);
-          }
         </script>
         <div id="chart-div-1"></div>
         <div id="chart-div-2"></div>
-        <div id="chart-div-3"></div>
       </div>
     </div>
   </div>
