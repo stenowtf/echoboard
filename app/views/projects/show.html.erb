@@ -136,14 +136,14 @@
               <tr>
                 <td>
                   <i class="icon-bookmark"></i> <%= link_to story.name, project_story_path(@project, story) %>
-                  <% if story.done %>
-                    <span class="label label-success">Done</span>
-                  <% end %>
                 </td>
                 <td>
                   <% unless story.stories_in_iterations.empty? %>
                     <% story.stories_in_iterations.order("id").each do |story_in_iteration| %>
                       <i class="icon-repeat"></i> <%= link_to @project.iterations.count(:conditions => ['id <= ?', Iteration.find(story_in_iteration.iteration_id)]).ordinalize, project_iteration_path(@project, Iteration.find(story_in_iteration.iteration_id)) %>
+                      <% if story_in_iteration.done %>
+                        <span class="label label-success">Done</span>
+                      <% end %>
                     <% end %>
                   <% else %>
                     None.
@@ -273,8 +273,8 @@
             data.addColumn('number', 'Iterations');
             data.addColumn('number', 'Project scope');
             data.addColumn('number', 'Ideal trend');
-            data.addColumn('number', 'Current trend');
             data.addColumn('number', 'Medium trend');
+            data.addColumn('number', 'Current trend');
 
             var numberOfIterations = <%= @iterations.count %>;
             var projectTotalPoints = <%= @project.total_points %>;
@@ -295,15 +295,15 @@
               data.setCell(<%= index + 1 %>, 1, projectTotalPoints );
               data.setCell(<%= index + 1 %>, 2, idealTrendPointsForIteration * <%= index + 1 %>);
               <% accumulator += iteration.iteration_points %>
-              data.setCell(<%= index + 1 %>, 3, <%= if @project.current_iteration_id != nil && @project.current_iteration_id >= iteration.id then accumulator else "null" end %>);
-              data.setCell(<%= index + 1 %>, 4, <%= if @project.current_iteration_id != nil && @project.current_iteration_id >= iteration.id then accumulator / (index + 1) else "null" end %>);
+              data.setCell(<%= index + 1 %>, 3, <%= if @project.current_iteration_id != nil && @project.current_iteration_id >= iteration.id then accumulator / (index + 1) else "null" end %>);
+              data.setCell(<%= index + 1 %>, 4, <%= if @project.current_iteration_id != nil && @project.current_iteration_id >= iteration.id then accumulator else "null" end %>);
             <% end %>
 
             var options = {
               chartArea: { height: '90%', width: '90%' },
               pointSize: 4,
               lineWidth: 3,
-              colors: ['green','blue', 'red', 'yellow'],
+              colors: ['green','blue', 'yellow', 'red'],
               series: { 0: { pointSize: 0, lineWidth: 2 } },
               height: 500,
               width: 940,
