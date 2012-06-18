@@ -7,8 +7,8 @@ gem 'thin', '1.3.1'
 gem 'simple_form', '2.0.2'
 gem 'rails-i18n', '0.6.4'
 gem 'pony', '1.4'
-gem 'paperclip', '3.0.4'
-gem 'aws-sdk', '1.5.2'
+gem 'paperclip', '3.1.1'
+gem 'aws-sdk', '1.5.4'
 gem 'newrelic_rpm', '3.4.0'
 
 gem 'eventmachine', '1.0.0.beta.2'
@@ -28,6 +28,7 @@ group :development do
   gem 'sqlite3', '1.3.6'
   gem 'foreman', '0.47.0'
   gem 'railroady', '1.0.7'
+  gem 'brakeman', '1.6.2'
 end
 
 group :test do
