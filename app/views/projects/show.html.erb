@@ -322,14 +322,16 @@
             data.addColumn('number', 'Estimated velocity');
             data.addColumn('number', 'Actual velocity');
 
-            var numberOfIterations = <%= @iterations.count %>;
+            var numberOfIterations = <%= @iterations.where("id <= ?", @project.current_iteration_id).count %>;
 
             data.addRows(numberOfIterations + 1);
 
             <% @iterations.each_with_index do |iteration, index| %>
-              data.setCell(<%= index + 1 %>, 0, '<%= index + 1 %>');
-              data.setCell(<%= index + 1 %>, 1, <%= iteration.estimated_velocity %>);
-              data.setCell(<%= index + 1 %>, 2, <%= iteration.iteration_points %>);
+              <% if @project.current_iteration_id != nil && @project.current_iteration_id >= iteration.id %>
+                data.setCell(<%= index + 1 %>, 0, '<%= index + 1 %>');
+                data.setCell(<%= index + 1 %>, 1, <%= iteration.estimated_velocity %>);
+                data.setCell(<%= index + 1 %>, 2, <%= iteration.iteration_points %>);
+              <% end %>
             <% end %>
 
             var options = {
@@ -353,7 +355,7 @@
             var data = new google.visualization.DataTable();
 
             data.addColumn('number', 'Iterations');
-            data.addColumn('number', 'Current velocity');
+            data.addColumn('number', 'Iteration velocity');
             data.addColumn('number', 'Medium velocity');
 
             var numberOfIterations = <%= @iterations.where("id <= ?", @project.current_iteration_id).count %>;
