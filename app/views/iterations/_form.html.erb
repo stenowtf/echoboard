@@ -37,7 +37,7 @@
   <legend>Selected <%= link_to "stories", project_path(@project) %></legend>
   <%= f.association :stories,
                     :collection => @project.stories,
-                    :label_method => lambda {|story| if story.done then story.name + " (Done)" elsif story.category == "Freezed" then story.name + " (Freezed)" elsif story.category == "Dropped" then story.name + " (Dropped)" else story.name end},
+                    :label_method => lambda {|story| if StoriesInIteration.find_by_story_id(story.id).done then story.name + " (Done)" elsif story.category == "Freezed" then story.name + " (Freezed)" elsif story.category == "Dropped" then story.name + " (Dropped)" else story.name end},
                     :as => :check_boxes %>
   <%= f.error :base %>
   <div class="form-actions">

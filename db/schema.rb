@@ -11,36 +11,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120612180550) do
+ActiveRecord::Schema.define(:version => 20120621120341) do
 
   create_table "difficulties", :force => true do |t|
     t.integer  "project_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "value"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+    t.integer  "value",      :default => 0
   end
 
   create_table "iterations", :force => true do |t|
-    t.datetime "starting_date"
-    t.datetime "ending_date"
+    t.datetime "starting_date",      :default => '2012-06-21 13:30:22'
+    t.datetime "ending_date",        :default => '2012-06-21 13:30:22'
     t.text     "notes"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                                            :null => false
+    t.datetime "updated_at",                                            :null => false
     t.integer  "project_id"
-    t.integer  "iteration_points"
-    t.integer  "total_points"
-    t.integer  "estimated_velocity"
-    t.integer  "actual_velocity"
+    t.integer  "iteration_points",   :default => 0
+    t.integer  "total_points",       :default => 0
+    t.integer  "estimated_velocity", :default => 0
+    t.integer  "actual_velocity",    :default => 0
   end
 
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "go_live"
-    t.datetime "created_at",           :null => false
-    t.datetime "updated_at",           :null => false
-    t.integer  "current_points"
-    t.integer  "total_points"
+    t.datetime "go_live",              :default => '2012-06-21 13:30:22'
+    t.datetime "created_at",                                              :null => false
+    t.datetime "updated_at",                                              :null => false
+    t.integer  "current_points",       :default => 0
+    t.integer  "total_points",         :default => 0
     t.integer  "current_iteration_id"
   end
 
@@ -52,24 +52,24 @@ ActiveRecord::Schema.define(:version => 20120612180550) do
   end
 
   create_table "stories", :force => true do |t|
-    t.integer  "priority"
+    t.integer  "priority",           :default => 0
     t.string   "name"
     t.text     "definition_of_done"
     t.string   "category"
     t.integer  "difficulty_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.integer  "project_id"
-    t.boolean  "done"
+    t.boolean  "done",               :default => false
   end
 
   create_table "stories_in_iterations", :force => true do |t|
     t.integer  "iteration_id"
     t.integer  "story_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.integer  "status_id"
-    t.boolean  "done"
+    t.boolean  "done",         :default => false
   end
 
   create_table "tasks", :force => true do |t|

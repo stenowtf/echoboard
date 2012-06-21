@@ -7,7 +7,7 @@ gem 'thin', '1.3.1'
 gem 'simple_form', '2.0.2'
 gem 'rails-i18n', '0.6.4'
 gem 'pony', '1.4'
-gem 'paperclip', '3.1.1'
+gem 'paperclip', '3.1.2'
 gem 'aws-sdk', '1.5.4'
 gem 'newrelic_rpm', '3.4.0'
 
@@ -21,7 +21,7 @@ group :assets do
   gem 'bootstrap-wysihtml5-rails', '0.2.11'
   gem 'modernizr-rails', '2.0.6'
   gem 'coffee-rails', '3.2.2'
-  gem 'uglifier', '1.2.4'
+  gem 'uglifier', '1.2.5'
 end
 
 group :development do
