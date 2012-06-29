@@ -8,8 +8,8 @@ gem 'simple_form', '2.0.2'
 gem 'rails-i18n', '0.6.4'
 gem 'pony', '1.4'
 gem 'paperclip', '3.1.2'
-gem 'aws-sdk', '1.5.4'
-gem 'newrelic_rpm', '3.4.0'
+gem 'aws-sdk', '1.5.5'
+gem 'newrelic_rpm', '3.4.0.1'
 
 gem 'eventmachine', '1.0.0.beta.2'
 
@@ -17,11 +17,11 @@ gem 'jquery-rails', '2.0.2'
 
 group :assets do
   gem 'sass-rails', '3.2.5'
-  gem 'bootstrap-sass', '2.0.3.1'
+  gem 'bootstrap-sass', '2.0.4.0'
   gem 'bootstrap-wysihtml5-rails', '0.2.11'
   gem 'modernizr-rails', '2.0.6'
   gem 'coffee-rails', '3.2.2'
-  gem 'uglifier', '1.2.5'
+  gem 'uglifier', '1.2.6'
 end
 
 group :development do
