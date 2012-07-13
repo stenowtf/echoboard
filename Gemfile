@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source :rubygems
 
 ruby '1.9.3'
 
@@ -8,10 +8,10 @@ gem 'simple_form', '2.0.2'
 gem 'rails-i18n', '0.6.5'
 gem 'pony', '1.4'
 gem 'paperclip', '3.1.2'
-gem 'aws-sdk', '1.5.6'
+gem 'aws-sdk', '1.5.7'
 gem 'newrelic_rpm', '3.4.0.1'
 
-gem 'eventmachine', '1.0.0.beta.2'
+gem 'eventmachine', '1.0.0.rc.4'
 
 gem 'jquery-rails', '2.0.2'
 
@@ -26,14 +26,14 @@ end
 
 group :development do
   gem 'sqlite3', '1.3.6'
-  gem 'foreman', '0.47.0'
-  gem 'railroady', '1.0.7'
+  gem 'foreman', '0.51.0'
+  gem 'railroady', '1.0.8'
   gem 'brakeman', '1.6.2'
 end
 
 group :test do
   gem 'sqlite3', '1.3.6'
-  gem 'railroady', '1.0.7'
+  gem 'railroady', '1.0.8'
 end
 
 group :production do
