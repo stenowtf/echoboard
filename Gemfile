@@ -7,9 +7,10 @@ gem 'thin', '1.4.1'
 gem 'simple_form', '2.0.2'
 gem 'rails-i18n', '0.6.5'
 gem 'pony', '1.4'
-gem 'paperclip', '3.1.2'
+gem 'paperclip', '3.1.3'
 gem 'aws-sdk', '1.5.7'
 gem 'newrelic_rpm', '3.4.0.1'
+gem 'wicked', '0.1.6'
 
 gem 'eventmachine', '1.0.0.rc.4'
 
@@ -24,6 +25,10 @@ group :assets do
   gem 'uglifier', '1.2.6'
 end
 
+# bundler --pre
+# heroku
+# lolcommits
+# hirb
 group :development do
   gem 'sqlite3', '1.3.6'
   gem 'foreman', '0.51.0'
