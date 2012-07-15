@@ -2,7 +2,7 @@
   <legend>Story data</legend>
   <%= f.error_notification %>
   <%= f.input :name, :input_html => { :class => "span6" } %>
-  <%= f.input :priority, :collection => 0..2, :as => :radio_buttons, :item_wrapper_class => 'inline' %>
+  <%= f.input :priority, :collection => 0..3, :as => :radio_buttons, :item_wrapper_class => 'inline' %>
   <%= f.input :category, :collection => ["Active", "Freezed", "Dropped"], :as => :radio_buttons, :item_wrapper_class => 'inline' %>
   <%= f.input :definition_of_done, :input_html => { :id => "story-dod", :class => "span6" } %>
 
