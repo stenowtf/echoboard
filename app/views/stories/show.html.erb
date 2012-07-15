@@ -11,7 +11,9 @@
     <i class="icon-file"></i> “<%= link_to @project.name, project_path(@project) %>”
     <span class="divider">/</span>
   </li>
-  <i class="icon-bookmark"></i> <li class="active">“<%= @story.name %>”</li>
+  <li class="active">
+    <i class="icon-bookmark"></i> “<%= @story.name %>”
+  </li>
 </ul>
 
 <div class="row">

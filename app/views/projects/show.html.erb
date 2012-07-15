@@ -293,7 +293,7 @@
               data.setCell(<%= index + 1 %>, 1, projectTotalPoints );
               data.setCell(<%= index + 1 %>, 2, idealTrendPointsForIteration * <%= index + 1 %>);
               <% accumulator += iteration.iteration_points %>
-              data.setCell(<%= index + 1 %>, 3, <%= if @project.current_iteration_id != nil && @project.current_iteration_id >= iteration.id then accumulator else "null" end %>);
+              data.setCell(<%= index + 1 %>, 3, <%= if @project.current_iteration_id != nil && @project.current_iteration_id > iteration.id then accumulator else "null" end %>);
             <% end %>
 
             var options = {
@@ -370,7 +370,7 @@
             data.setCell(0, 2, 0);
 
             <% @iterations.each_with_index do |iteration, index| %>
-              <% if @project.current_iteration_id != nil && @project.current_iteration_id >= iteration.id %>
+              <% if @project.current_iteration_id != nil && @project.current_iteration_id > iteration.id %>
                 data.setCell(<%= index + 1 %>, 0, <%= index + 1 %>);
                 data.setCell(<%= index + 1 %>, 1, <%= iteration.iteration_points %>);
                 <% accumulator += iteration.iteration_points %>
