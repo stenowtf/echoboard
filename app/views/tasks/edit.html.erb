@@ -1,1 +1,21 @@
+<ul class="breadcrumb">
+  <li>
+    <i class="icon-home"></i> <%= link_to "Home", root_path %>
+    <span class="divider">/</span>
+  </li>
+  <li>
+    <i class="icon-book"></i> <%= link_to "Projects", projects_path %>
+    <span class="divider">/</span>
+  </li>
+  <li>
+    <i class="icon-file"></i> “<%= link_to @project.name, project_path(@project) %>”
+    <span class="divider">/</span>
+  </li>
+  <li>
+    <i class="icon-bookmark"></i> “<%= link_to @story.name, project_story_path(@project, @story) %>”
+    <span class="divider">/</span>
+  </li>
+  <i class="icon-list-alt"></i> Edit task “<%= @task.name %>”
+</ul>
+
 <%= render 'form' %>
