@@ -17,13 +17,13 @@
 <div class="row">
   <div class="span8">
     <div class="row">
-      <div class="span7">
+      <div class="span6">
         <h2>
           <%= (@project.iterations.count(:conditions => ['id <= ?', @iteration.id])).ordinalize %>
         </h2>
       <h6>Project: <%= link_to @project.name, project_path(@project) %></h6>
       </div>
-      <div class="span1" id="counter">
+      <div class="span2" id="counter">
         <h2><%= @iteration.iteration_points %>/<%= @iteration.total_points %></h2>
       </div>
     </div>
@@ -73,8 +73,8 @@
         </div>
       </div>
 
+      <br />
       <% unless @iteration.notes.empty? %>
-        <br />
         <div class="row">
           <div class="span7">
             <p>
