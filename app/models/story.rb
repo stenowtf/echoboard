@@ -1,13 +1,14 @@
 class Story < ActiveRecord::Base
   belongs_to :project
-  has_many :stories_in_iterations
+  has_many :stories_in_iterations, dependent: :destroy
   has_many :iterations, through: :stories_in_iterations
-  has_many :tasks
+  has_many :tasks, dependent: :destroy
   has_many :teams, through: :tasks
 
   default_scope :order => "name"
 
-  after_save :update_project_total_points
+  after_save    :update_project_total_points
+  after_destroy :update_project_total_points
 
   private
 
