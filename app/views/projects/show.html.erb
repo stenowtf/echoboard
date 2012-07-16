@@ -250,7 +250,7 @@
                       <a href="#collapse<%= iteration.id %>" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion"><i class="icon-repeat"></i> <%= @project.iterations.count(:conditions => ['id <= ?', iteration.id]).ordinalize %>
                       </a>
                     </div>
-                    <div class="accordion-body collapse" id="collapse<%= iteration.id %>">
+                    <div class="accordion-body collapse <%= if @project.current_iteration_id == iteration.id then "in" end %>" id="collapse<%= iteration.id %>">
                       <div class="accordion-inner">
                         <% iteration.stories_in_iterations.each do |story_in_iteration| %>
                           <p style="padding-left:20px;"><i class="icon-bookmark"></i> <%= link_to story_in_iteration.story.name, project_story_path(@project, story_in_iteration.story) %></p>
