@@ -241,25 +241,15 @@
 
             <h3>Closed stories</h3>
             <% unless @iterations.empty? %>
-              <div class="accordion" id="accordion1">
-                <% @iterations.each do |iteration| %>
-                  <div class="accordion-group">
-                    <div class="accordion-heading">
-                      <a href="#collapse1<%= iteration.id %>" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1"><i class="icon-repeat"></i> <%= @project.iterations.count(:conditions => ['id <= ?', iteration.id]).ordinalize %>
-                      </a>
-                    </div>
-                    <div class="accordion-body collapse <%= if @project.current_iteration_id == iteration.id then "in" end %>" id="collapse1<%= iteration.id %>">
-                      <div class="accordion-inner">
-                        <% iteration.stories_in_iterations.each do |story_in_iteration| %>
-                          <% if story_in_iteration.done %>
-                            <p style="padding-left:20px;"><i class="icon-bookmark"></i> <%= link_to story_in_iteration.story.name, project_story_path(@project, story_in_iteration.story) %></p>
-                          <% end %>
-                        <% end %>
-                      </div>
-                    </div>
-                  </div>
+              <% @iterations.each do |iteration| %>
+                <p><i class="icon-repeat"></i> <%= link_to @project.iterations.count(:conditions => ['id <= ?', iteration.id]).ordinalize, project_iteration_path(@project, iteration) %>
+                </p>
+                <% iteration.stories_in_iterations.each do |story_in_iteration| %>
+                  <% if story_in_iteration.done %>
+                    <p style="padding-left:20px;"><i class="icon-bookmark"></i> <%= link_to story_in_iteration.story.name, project_story_path(@project, story_in_iteration.story) %> <span class="badge badge-success"><%= Difficulty.find(Story.find(story_in_iteration.story_id).difficulty_id).value %></span></p>
+                  <% end %>
                 <% end %>
-              </div>
+              <% end %>
             <% end %>
 
           </div>
