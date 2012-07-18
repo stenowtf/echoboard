@@ -16,7 +16,7 @@ class StoryPdf < Prawn::Document
       move_down 10
       text_box "#{@story.name}", :at => [10, cursor], :height => 100, size: 12, style: :bold
       move_down 12
-      text_box "For a more detailed version of this story, check #{@view.project_story_url(@project, @story)}.", size: 6, :at => [10, cursor], :height => 100
+      text_box "For a more detailed version of this very story, please check #{@view.project_story_url(@project, @story)}.", size: 6, :at => [10, cursor], :height => 100
       move_down 10
       stroke_horizontal_rule
       move_down 10

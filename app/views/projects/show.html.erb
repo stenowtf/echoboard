@@ -381,7 +381,7 @@
             data.addColumn('number', 'Iteration velocity');
             data.addColumn('number', 'Medium velocity');
 
-            var numberOfIterations = <%= @iterations.where("id <= ?", @project.current_iteration_id).count %>;
+            var numberOfIterations = <%= @iterations.where("id < ?", @project.current_iteration_id).count %>;
             var projectTotalPoints = <%= @project.total_points %>;
 
             data.addRows(numberOfIterations + 1);
