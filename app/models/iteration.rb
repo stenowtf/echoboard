@@ -1,6 +1,6 @@
 class Iteration < ActiveRecord::Base
   belongs_to :project
-  has_many :stories_in_iterations
+  has_many :stories_in_iterations, dependent: :destroy
   has_many :stories, through: :stories_in_iterations
 
   default_scope :order => "id asc"

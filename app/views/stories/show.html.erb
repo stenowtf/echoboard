@@ -30,6 +30,11 @@
         </a>
         <ul class="dropdown-menu">
           <li>
+            <%= link_to project_story_path(@project, @story, format: "pdf") do %>
+              <i class="icon-fullscreen"></i> Printable story (PDF)
+            <% end %>
+          </li>
+          <li>
             <%= link_to edit_project_story_path(@project, @story) do %>
               <i class="icon-pencil"></i> Edit story
             <% end %>

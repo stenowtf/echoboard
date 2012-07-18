@@ -3,6 +3,15 @@ class StoriesController < ApplicationController
   def show
     @project = Project.find(params[:project_id])
     @story = @project.stories.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = StoryPdf.new(@project, @story, view_context)
+        send_data pdf.render, filename: "#{@project.name} - #{@story.name}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
+    end
   end
 
   # GET /projects/:project_id/stories/new(.:format)

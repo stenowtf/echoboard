@@ -25,8 +25,8 @@ class Story < ActiveRecord::Base
       self.stories_in_iterations.where("done = ?", true).each do |done_story_in_iteration|
         value += Difficulty.find(Story.find(done_story_in_iteration.story_id).difficulty_id).value
       end
-      self.stories_in_iterations.each do |iteration|
-        iteration.update_column(:iteration_points, value)
+      self.stories_in_iterations.each do |story_in_iteration|
+        story_in_iteration.iteration.update_column(:iteration_points, value)
       end
     end
 
@@ -35,8 +35,8 @@ class Story < ActiveRecord::Base
       self.stories_in_iterations.each do |story_in_iteration|
         value += Difficulty.find(Story.find(story_in_iteration.story_id).difficulty_id).value
       end
-      self.stories_in_iterations.each do |iteration|
-        iteration.update_column(:total_points, value)
+      self.stories_in_iterations.each do |story_in_iteration|
+        story_in_iteration.iteration.update_column(:total_points, value)
       end
     end
 end
