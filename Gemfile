@@ -39,7 +39,6 @@ end
 
 group :test do
   gem 'sqlite3', '1.3.6'
-  gem 'railroady', '1.0.8'
 end
 
 group :production do
