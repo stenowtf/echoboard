@@ -11,6 +11,7 @@ gem 'paperclip', '3.1.4'
 gem 'aws-sdk', '1.5.8'
 gem 'newrelic_rpm', '3.4.1'
 gem 'wicked', '0.1.6'
+gem 'prawn', '0.12.0'
 
 gem 'eventmachine', '1.0.0.rc.4'
 

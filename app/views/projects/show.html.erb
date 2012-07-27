@@ -357,6 +357,12 @@
               <% end %>
             <% end %>
 
+            <% if @iterations.empty? %>
+                data.setCell(0, 0, '0');
+                data.setCell(0, 1, 0);
+                data.setCell(0, 2, 0);
+            <% end %>
+
             var options = {
               chartArea: { height: '90%', width: '90%' },
               height: 500,
@@ -381,7 +387,7 @@
             data.addColumn('number', 'Iteration velocity');
             data.addColumn('number', 'Medium velocity');
 
-            var numberOfIterations = <%= @iterations.where("id <= ?", @project.current_iteration_id).count %>;
+            var numberOfIterations = <%= @iterations.where("id < ?", @project.current_iteration_id).count %>;
             var projectTotalPoints = <%= @project.total_points %>;
 
             data.addRows(numberOfIterations + 1);
