@@ -4,6 +4,7 @@ ruby '1.9.3'
 
 gem 'rails', '3.2.7'
 gem 'thin', '1.4.1'
+gem 'pg', '0.13.2'
 gem 'simple_form', '2.0.2'
 gem 'rails-i18n', '0.6.5'
 gem 'pony', '1.4'
@@ -30,17 +31,9 @@ end
 # heroku
 # lolcommits
 # hirb
+# taps
 group :development do
-  gem 'sqlite3', '1.3.6'
   gem 'foreman', '0.53.0'
   gem 'railroady', '1.0.8'
   gem 'brakeman', '1.7.0'
-end
-
-group :test do
-  gem 'sqlite3', '1.3.6'
-end
-
-group :production do
-  gem 'pg', '0.13.2'
 end

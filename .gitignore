@@ -20,3 +20,4 @@ capybara-*.html
 **.orig
 rerun.txt
 pickle-email-*.html
+logfile
