@@ -9,7 +9,7 @@ gem 'simple_form', '2.0.2'
 gem 'rails-i18n', '0.6.5'
 gem 'pony', '1.4'
 gem 'paperclip', '3.1.4'
-gem 'aws-sdk', '1.6.0'
+gem 'aws-sdk', '1.6.1'
 gem 'newrelic_rpm', '3.4.1'
 gem 'wicked', '0.2.0'
 gem 'prawn', '0.12.0'
@@ -24,7 +24,7 @@ group :assets do
   gem 'bootstrap-wysihtml5-rails', '0.3.0'
   gem 'modernizr-rails', '2.0.6'
   gem 'coffee-rails', '3.2.2'
-  gem 'uglifier', '1.2.6'
+  gem 'uglifier', '1.2.7'
 end
 
 # bundler --pre
