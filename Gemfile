@@ -2,14 +2,14 @@ source :rubygems
 
 ruby '1.9.3'
 
-gem 'rails', '3.2.7'
+gem 'rails', '3.2.8'
 gem 'thin', '1.4.1'
 gem 'pg', '0.13.2'
 gem 'simple_form', '2.0.2'
 gem 'rails-i18n', '0.6.5'
 gem 'pony', '1.4'
 gem 'paperclip', '3.1.4'
-gem 'aws-sdk', '1.6.1'
+gem 'aws-sdk', '1.6.3'
 gem 'newrelic_rpm', '3.4.1'
 gem 'wicked', '0.2.0'
 gem 'prawn', '0.12.0'
@@ -35,5 +35,5 @@ end
 group :development do
   gem 'foreman', '0.53.0'
   gem 'railroady', '1.0.8'
-  gem 'brakeman', '1.7.0'
+  gem 'brakeman', '1.7.1'
 end
