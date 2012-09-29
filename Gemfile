@@ -30,6 +30,7 @@ end
 # lolcommits
 # hirb
 # taps
+# travis-lint
 group :development do
   gem 'foreman', '0.60.0'
   gem 'railroady', '1.1.0'
