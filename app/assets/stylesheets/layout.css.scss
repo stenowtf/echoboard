@@ -15,4 +15,10 @@ body {
   #iterations-buttons .btn-large {
   	margin-bottom: 5px;
   }
+
+  // fix white icon in active tab
+  .nav-tabs > .active > a > [class^="icon-"],
+  .nav-tabs > .active > a > [class*="icon-"] {
+    background-image: url("/assets/glyphicons-halflings.png") !important;
+  }
 }
