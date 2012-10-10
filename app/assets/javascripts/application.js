@@ -14,5 +14,5 @@
 //= require jquery_ujs
 //= require modernizr
 //= require bootstrap
-//= require bootstrap-wysihtml5/locales
+//= require bootstrap-wysihtml5
 //= require_tree .
