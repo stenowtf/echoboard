@@ -37,7 +37,7 @@ GEM
       uuidtools (~> 2.1)
     bootstrap-sass (2.2.1.1)
       sass (~> 3.2)
-    bootstrap-wysihtml5-rails (0.3.1.10)
+    bootstrap-wysihtml5-rails (0.3.1.11)
       railties (>= 3.0)
     brakeman (1.8.3)
       activesupport
@@ -154,7 +154,7 @@ GEM
     simple_form (2.0.4)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
-    sprockets (2.2.1)
+    sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
@@ -186,7 +186,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk (= 1.7.1)
   bootstrap-sass (= 2.2.1.1)
-  bootstrap-wysihtml5-rails (= 0.3.1.10)
+  bootstrap-wysihtml5-rails (= 0.3.1.11)
   brakeman (= 1.8.3)
   coffee-rails (= 3.2.2)
   foreman (= 0.60.2)
