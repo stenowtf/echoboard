@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(:version => 20120621120341) do
   end
 
   create_table "iterations", :force => true do |t|
-    t.datetime "starting_date",      :default => '2012-06-21 13:30:22'
-    t.datetime "ending_date",        :default => '2012-06-21 13:30:22'
+    t.datetime "starting_date",      :default => '2012-12-27 17:13:22'
+    t.datetime "ending_date",        :default => '2012-12-27 17:13:22'
     t.text     "notes"
     t.datetime "created_at",                                            :null => false
     t.datetime "updated_at",                                            :null => false
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(:version => 20120621120341) do
   create_table "projects", :force => true do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "go_live",              :default => '2012-06-21 13:30:22'
+    t.datetime "go_live",              :default => '2012-12-27 17:13:22'
     t.datetime "created_at",                                              :null => false
     t.datetime "updated_at",                                              :null => false
     t.integer  "current_points",       :default => 0
