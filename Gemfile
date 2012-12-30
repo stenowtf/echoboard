@@ -6,7 +6,7 @@ gem 'rails', '3.2.9'
 gem 'thin', '1.5.0'
 gem 'pg', '0.14.1'
 gem 'simple_form', '2.0.4'
-gem 'rails-i18n', '0.7.1'
+gem 'rails-i18n', '0.7.2'
 gem 'pony', '1.4'
 gem 'paperclip', '3.4.0'
 gem 'aws-sdk', '1.8.0'
@@ -27,7 +27,6 @@ end
 
 # bundler
 # lolcommits
-# hirb
 group :development do
   gem 'foreman', '0.60.2'
   gem 'railroady', '1.1.0'
