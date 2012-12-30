@@ -15,4 +15,5 @@
 //= require modernizr
 //= require bootstrap
 //= require bootstrap-wysihtml5
+//= require browser_details
 //= require_tree .

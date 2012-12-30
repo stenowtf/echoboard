@@ -13,6 +13,7 @@ gem 'aws-sdk', '1.8.0'
 gem 'newrelic_rpm', '3.5.4.34'
 gem 'wicked', '0.3.4'
 gem 'prawn', '0.12.0'
+gem 'browser_details', '0.0.4'
 
 gem 'jquery-rails', '2.1.4'
 
