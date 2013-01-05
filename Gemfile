@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '1.9.3'
 
-gem 'rails', '3.2.9'
+gem 'rails', '3.2.10'
 gem 'thin', '1.5.0'
 gem 'pg', '0.14.1'
 gem 'simple_form', '2.0.4'
@@ -34,5 +34,5 @@ group :development do
   gem 'brakeman', '1.9.0'
   gem 'better_errors', '0.3.2'
   gem 'binding_of_caller', '0.6.8'
-  gem 'meta_request', '0.2.0'
+  gem 'meta_request', '0.2.1'
 end
